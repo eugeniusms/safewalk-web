@@ -4,9 +4,9 @@ import type { NextApiRequest, NextApiResponse } from "next";
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
   axios
     .post(
-      `${process.env.NEXT_PUBLIC_APP_API_BACKEND_URL}/api/v1/authentication/login/`,
+      `${process.env.NEXT_PUBLIC_APP_API_BACKEND_URL}/api/v1/authentication/manual-user/login/`,
       {
-        username: req.body.username,
+        email: req.body.email,
         password: req.body.password,
       }
     )

@@ -36,11 +36,17 @@ export const AuthLoginModule = () => {
       email,
       password,
     };
-    axios.post("/api/auth/login", sendData).then((response) => {
-      console.log(response.data);
-      // Cookies.set("token", response.data.token);
-      router.push("/maps");
-    });
+    console.log("send", sendData);
+    axios
+      .post("/api/auth/login", sendData)
+      .then((response) => {
+        console.log(response.data);
+        // Cookies.set("token", response.data.token);
+        // router.push("/maps");
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
   };
 
   const email = watch("email");
