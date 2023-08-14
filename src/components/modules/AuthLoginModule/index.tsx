@@ -3,6 +3,7 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 // import Cookies from "js-cookie";
@@ -19,6 +20,7 @@ export const AuthLoginModule = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const { handleSave, handleLoad } = useLocalStorage();
+  const toast = useToast();
 
   const {
     control,
@@ -42,10 +44,24 @@ export const AuthLoginModule = () => {
       .post("/api/auth/login", sendData)
       .then((response) => {
         handleSave("SW-EMAIL", response.data.data.email);
+        toast({
+          title: "Login Success",
+          status: "success",
+          position: "top",
+          duration: 4000,
+          isClosable: true,
+        });
         router.push("/maps");
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log(error);
+        toast({
+          title: "Login Failed",
+          status: "error",
+          position: "top",
+          duration: 4000,
+          isClosable: true,
+        });
       });
   };
 
