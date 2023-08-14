@@ -7,6 +7,7 @@ import {
 import axios from "axios";
 import Cookies from "js-cookie";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -184,6 +185,7 @@ const RegisterPage = ({
   showPassword,
   setShowPassword,
 }: RegisterModuleProps) => {
+  const router = useRouter();
   return (
     <div className="h-screen relative">
       <div>
@@ -325,7 +327,10 @@ const RegisterPage = ({
         </div>
         <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
           <SWButton label="Create Account" onClick={nextPage} />
-          <div className="text-center text-xs text-transparent bg-clip-text bg-gradient-to-r from-[#4D61A3] to-[#3E35F7] py-4 underline">
+          <div
+            className="text-center text-xs text-transparent bg-clip-text bg-gradient-to-r from-[#4D61A3] to-[#3E35F7] py-4 underline"
+            onClick={() => router.push("/auth/login")}
+          >
             already have an account?
           </div>
         </div>
