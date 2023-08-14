@@ -1,14 +1,42 @@
-import { Input } from "@chakra-ui/react";
+import { Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { SWButton } from "src/components/elements/Button";
-import { ResetPasswordModuleProps } from "./interface";
+import { FormData, FormDefault, ResetPasswordModuleProps } from "./interface";
 
 export const AuthResetPasswordModule: React.FC = () => {
   const [selectedAccount, setSelectedAccount] = useState<string>("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
   const [page, setPage] = useState(1);
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormDefault>({
+    defaultValues: {
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const onSubmit = (data: FormDefault) => {
+    const { password, confirmPassword } = data;
+    const sendData: FormData = {
+      password,
+      confirmPassword,
+    };
+    axios.post("/api/auth/reset-password", sendData).then((response) => {
+      console.log(response.data.token);
+    });
+  };
 
   const selectAccount = (account: string) => {
     setSelectedAccount(account);
@@ -42,7 +70,21 @@ export const AuthResetPasswordModule: React.FC = () => {
         />
       );
     case 3:
-      return <ResetPasswordPage prevPage={prevPage} nextPage={nextPage} />;
+      return (
+        <ResetPasswordPage
+          prevPage={prevPage}
+          nextPage={nextPage}
+          control={control}
+          handleSubmit={handleSubmit}
+          watch={watch}
+          errors={errors}
+          onSubmit={onSubmit}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+          showConfirmPassword={showConfirmPassword}
+          setShowConfirmPassword={setShowConfirmPassword}
+        />
+      );
     case 4:
       return (
         <ResetPasswordSuccessPage prevPage={prevPage} nextPage={nextPage} />
@@ -203,8 +245,114 @@ const VerificationPage = ({
 const ResetPasswordPage = ({
   prevPage,
   nextPage,
+  control,
+  handleSubmit,
+  watch,
+  errors,
+  onSubmit,
+  showPassword,
+  setShowPassword,
+  showConfirmPassword,
+  setShowConfirmPassword,
 }: ResetPasswordModuleProps) => {
-  return <div></div>;
+  return (
+    <div className="px-8 py-8 h-screen relative">
+      <div onClick={prevPage}>
+        <Image
+          src="/assets/icons/back.svg"
+          alt="landing"
+          width={50}
+          height={50}
+        />
+      </div>
+      <div className="text-white text-3xl font-bold py-4">
+        Reset your password here
+      </div>
+      <div className="text-white text-sm font-light">
+        Select which contact details should we use to reset your password
+      </div>
+      <div className="flex justify-center">
+        <div className="w-full py-8">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-4 text-white"
+          >
+            <div>
+              <Controller
+                name="firstName"
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field }) => (
+                  <InputGroup size="md">
+                    <Input
+                      {...field}
+                      type={showPassword ? "text" : "password"}
+                      placeholder="New Password"
+                      backgroundColor={"#252525"}
+                      opacity={0.8}
+                      border="none"
+                      borderRadius={12}
+                    />
+                    <InputRightElement>
+                      {showPassword ? (
+                        <FaEyeSlash onClick={() => setShowPassword(false)} />
+                      ) : (
+                        <FaEye onClick={() => setShowPassword(true)} />
+                      )}
+                    </InputRightElement>
+                  </InputGroup>
+                )}
+              />
+              {errors.password && (
+                <p className="text-sm text-white">{errors.password.message}</p>
+              )}
+            </div>
+            <div>
+              <Controller
+                name="lastName"
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field }) => (
+                  <InputGroup size="md">
+                    <Input
+                      {...field}
+                      type={showConfirmPassword ? "text" : "password"}
+                      placeholder="Confirm Password"
+                      backgroundColor={"#252525"}
+                      opacity={0.8}
+                      border="none"
+                      borderRadius={12}
+                    />
+                    <InputRightElement>
+                      {showConfirmPassword ? (
+                        <FaEyeSlash
+                          onClick={() => setShowConfirmPassword(false)}
+                        />
+                      ) : (
+                        <FaEye onClick={() => setShowConfirmPassword(true)} />
+                      )}
+                    </InputRightElement>
+                  </InputGroup>
+                )}
+              />
+              {errors.confirmPassword && (
+                <p className="text-sm text-white">
+                  {errors.confirmPassword.message}
+                </p>
+              )}
+            </div>
+          </form>
+        </div>
+      </div>
+      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+        <SWButton label="Next" onClick={nextPage} />
+      </div>
+    </div>
+  );
 };
 
 const ResetPasswordSuccessPage = ({
