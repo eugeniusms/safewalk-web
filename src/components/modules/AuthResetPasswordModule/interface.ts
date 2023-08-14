@@ -1,1 +1,4 @@
-export interface Props {}
+export interface ResetPasswordModuleProps {
+  prevPage: () => void;
+  nextPage: () => void;
+}
