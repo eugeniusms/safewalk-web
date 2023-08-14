@@ -126,6 +126,34 @@ export const AuthRegisterModule: React.FC = () => {
           setShowPassword={setShowPassword}
         />
       );
+    case 4:
+      return (
+        <RegisterPhotoSuccess
+          prevPage={prevPage}
+          nextPage={nextPage}
+          control={control}
+          handleSubmit={handleSubmit}
+          watch={watch}
+          errors={errors}
+          onSubmit={onSubmit}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        />
+      );
+    case 5:
+      return (
+        <RegisterSuccess
+          prevPage={prevPage}
+          nextPage={nextPage}
+          control={control}
+          handleSubmit={handleSubmit}
+          watch={watch}
+          errors={errors}
+          onSubmit={onSubmit}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        />
+      );
     default:
       return (
         <RegisterPage
@@ -420,7 +448,7 @@ const RegisterBio = ({
 
 const RegisterPhoto = ({ prevPage, nextPage }: RegisterModuleProps) => {
   const handleUpload = (file: File) => {
-    // TODO: upload file
+    // TODO: upload file connect firebase storage
     console.log("File uploaded:", file);
   };
   return (
@@ -459,4 +487,43 @@ const RegisterPhoto = ({ prevPage, nextPage }: RegisterModuleProps) => {
       </div>
     </div>
   );
+};
+
+// TODO: replace dummy image with link from firebase storage
+const RegisterPhotoSuccess = ({ prevPage, nextPage }: RegisterModuleProps) => {
+  return (
+    <div>
+      <div className="px-8 py-8 h-screen relative">
+        <div onClick={prevPage}>
+          <Image
+            src="/assets/icons/back.svg"
+            alt="landing"
+            width={50}
+            height={50}
+          />
+        </div>
+        <div className="text-white text-3xl font-bold py-4">
+          Upload Your Photo Profile
+        </div>
+        <div className="text-white text-sm font-light">
+          This data will be displayed in your account profile for security
+        </div>
+        <div>
+          <Image
+            src="/assets/images/dummy-profile-photo.png"
+            alt="profile-photo"
+            width={290}
+            height={290}
+          />
+        </div>
+        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+          <SWButton label="Next" onClick={nextPage} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const RegisterSuccess = ({ prevPage, nextPage }: RegisterModuleProps) => {
+  return <div></div>;
 };
