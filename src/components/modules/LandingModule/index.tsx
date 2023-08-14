@@ -1,20 +1,26 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { SWButton } from "src/components/elements/Button";
 import { LandingModuleProps } from "./interface";
 
 export const LandingModule: React.FC = () => {
+  const router = useRouter();
   const [page, setPage] = useState(1);
 
   const nextPage = () => {
     setPage(page + 1);
   };
 
+  const goToAuth = () => {
+    router.push("/auth/register");
+  };
+
   switch (page) {
     case 1:
       return <LandingPage1 nextPage={nextPage} />;
     case 2:
-      return <LandingPage2 nextPage={nextPage} />;
+      return <LandingPage2 nextPage={goToAuth} />;
     default:
       return <LandingPage1 nextPage={nextPage} />;
   }

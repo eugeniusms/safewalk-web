@@ -1,1 +1,3 @@
-export interface Props {}
+export interface RegisterModuleProps {
+  nextPage: () => void;
+}
