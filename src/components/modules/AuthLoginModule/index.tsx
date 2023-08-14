@@ -12,11 +12,13 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { SWButton } from "src/components/elements/Button";
+import { useLocalStorage } from "src/components/hooks/useLocalStorage";
 import { FormData, FormDefault } from "./interface";
 
 export const AuthLoginModule = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const { handleSave, handleLoad } = useLocalStorage();
 
   const {
     control,
@@ -36,13 +38,15 @@ export const AuthLoginModule = () => {
       email,
       password,
     };
-    console.log("send", sendData);
     axios
       .post("/api/auth/login", sendData)
       .then((response) => {
         console.log(response.data);
         // Cookies.set("token", response.data.token);
         // router.push("/maps");
+        handleSave("email", response.data.data.email);
+        const a = handleLoad("email");
+        console.log(a);
       })
       .catch((error) => {
         console.log(error.response.data);
