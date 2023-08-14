@@ -19,7 +19,7 @@ import { FormData, FormDefault } from "./interface";
 export const AuthLoginModule = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const { handleSave, handleLoad } = useLocalStorage();
+  const { handleSave } = useLocalStorage();
   const toast = useToast();
 
   const {
