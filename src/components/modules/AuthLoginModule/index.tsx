@@ -44,6 +44,7 @@ export const AuthLoginModule = () => {
       .post("/api/auth/login", sendData)
       .then((response) => {
         handleSave("SW-EMAIL", response.data.data.email);
+        handleSave("SW-PASSWORD", response.data.data.password);
         toast({
           title: "Login Success",
           status: "success",
