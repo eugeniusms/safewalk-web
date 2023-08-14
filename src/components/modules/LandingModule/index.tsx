@@ -28,8 +28,8 @@ const LandingPage1 = ({ nextPage }: LandingModuleProps) => {
           <Image
             src="/assets/images/safewalk-logo.svg"
             alt="landing"
-            width={140}
-            height={140}
+            width={160}
+            height={160}
           />
         </div>
         <div className="pt-4 pb-10">
@@ -54,22 +54,22 @@ const LandingPage2 = ({ nextPage }: LandingModuleProps) => {
       <div>
         <div className="flex justify-center">
           <Image
-            src="/assets/images/safewalk-logo.svg"
+            src="/assets/images/landing-girl.svg"
             alt="landing"
-            width={140}
-            height={140}
+            width={280}
+            height={280}
           />
         </div>
         <div className="pt-4 pb-10">
-          <div className="text-center text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4D61A3] to-[#3E35F7]">
-            TEST
+          <div className="text-center text-2xl font-bold text-white">
+            Step into Safety, Walk with Confidence
           </div>
-          <div className="text-center text-white text-base font-semibold">
-            Your Safety Companion
+          <div className="text-center text-white text-xs font-light pt-2">
+            Empowering Security for Every Step You Take!
           </div>
         </div>
         <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
-          <SWButton label="Next" onClick={() => console.log("CHECK")} />
+          <SWButton label="Next" onClick={nextPage} />
         </div>
       </div>
     </div>
