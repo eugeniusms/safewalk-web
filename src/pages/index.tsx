@@ -1,9 +1,9 @@
-import { LandingModule } from "src/components/modules/LandingModule";
+import { BufferModule } from "@modules";
 
 export default function Home() {
   return (
     <div className="container">
-      <LandingModule />
+      <BufferModule />
     </div>
   );
 }

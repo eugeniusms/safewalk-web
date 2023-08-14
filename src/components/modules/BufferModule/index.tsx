@@ -7,11 +7,8 @@ export const BufferModule: React.FC = () => {
   const router = useRouter();
   return (
     <div>
-      <div
-        className="h-screen w-screen flex justify-center items-center relative bg-gradient-to-b from-[#000000] to-[#1E1E1F]"
-        onClick={() => router.push("/maps")}
-      >
-        <div className="animate-pulse">
+      <div className="h-screen w-screen flex justify-center items-center relative bg-gradient-to-b from-[#000000] to-[#1E1E1F]">
+        <div className="animate-pulse" onClick={() => router.push("/maps")}>
           <div className="flex justify-center">
             <Image
               src="/assets/images/safewalk-logo.svg"

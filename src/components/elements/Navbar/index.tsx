@@ -5,7 +5,6 @@ import { BsMegaphone } from "react-icons/bs";
 
 const Navbar = () => {
   const router = useRouter();
-  console.log(router.pathname);
 
   let iconMenuHome = "/assets/icons/menu-home.svg";
   let iconMenuLocation = "/assets/icons/menu-location.svg";
