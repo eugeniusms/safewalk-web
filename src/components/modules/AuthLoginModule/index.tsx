@@ -5,7 +5,7 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import axios from "axios";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -36,8 +36,10 @@ export const AuthLoginModule = () => {
       email,
       password,
     };
-    axios.post("/api/auth/register", sendData).then((response) => {
-      Cookies.set("token", response.data.token);
+    axios.post("/api/auth/login", sendData).then((response) => {
+      console.log(response.data);
+      // Cookies.set("token", response.data.token);
+      router.push("/maps");
     });
   };
 
@@ -177,7 +179,7 @@ export const AuthLoginModule = () => {
           Forgot Your Password?
         </div>
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-          <SWButton label="Login" onClick={() => router.push("/maps")} />
+          <SWButton label="Login" onClick={handleSubmit(onSubmit)} />
         </div>
       </div>
     </div>
