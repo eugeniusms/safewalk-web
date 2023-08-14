@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { SWButton } from "src/components/elements/Button";
+import UploadPhoto from "src/components/elements/Upload";
 import { FormData, FormDefault, RegisterModuleProps } from "./interface";
 
 export const AuthRegisterModule: React.FC = () => {
@@ -418,6 +419,10 @@ const RegisterBio = ({
 };
 
 const RegisterPhoto = ({ prevPage, nextPage }: RegisterModuleProps) => {
+  const handleUpload = (file: File) => {
+    // TODO: upload file
+    console.log("File uploaded:", file);
+  };
   return (
     <div>
       <div className="px-8 py-8 h-screen relative">
@@ -434,6 +439,19 @@ const RegisterPhoto = ({ prevPage, nextPage }: RegisterModuleProps) => {
         </div>
         <div className="text-white text-sm font-light">
           This data will be displayed in your account profile for security
+        </div>
+        <div className="scale-125 pt-6">
+          <UploadPhoto
+            onUpload={handleUpload}
+            trigger={
+              <Image
+                src="/assets/images/gallery-button.svg"
+                alt="gallery-button"
+                width={290}
+                height={290}
+              />
+            }
+          />
         </div>
         <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
           <SWButton label="Next" onClick={nextPage} />
