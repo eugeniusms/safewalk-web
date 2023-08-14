@@ -324,7 +324,7 @@ const RegisterBio = ({
       <div className="text-white text-3xl font-bold py-4">
         Fill in your bio to get started
       </div>
-      <div className="text-white text-sm">
+      <div className="text-white text-sm font-light">
         This data will be displayed in your account profile for security
       </div>
       <div className="flex justify-center">
@@ -417,6 +417,28 @@ const RegisterBio = ({
   );
 };
 
-const RegisterPhoto = ({ nextPage }: RegisterModuleProps) => {
-  return <div></div>;
+const RegisterPhoto = ({ prevPage, nextPage }: RegisterModuleProps) => {
+  return (
+    <div>
+      <div className="px-8 py-8 h-screen relative">
+        <div onClick={prevPage}>
+          <Image
+            src="/assets/icons/back.svg"
+            alt="landing"
+            width={50}
+            height={50}
+          />
+        </div>
+        <div className="text-white text-3xl font-bold py-4">
+          Upload Your Photo Profile
+        </div>
+        <div className="text-white text-sm font-light">
+          This data will be displayed in your account profile for security
+        </div>
+        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+          <SWButton label="Next" onClick={nextPage} />
+        </div>
+      </div>
+    </div>
+  );
 };
