@@ -41,12 +41,8 @@ export const AuthLoginModule = () => {
     axios
       .post("/api/auth/login", sendData)
       .then((response) => {
-        console.log(response.data);
-        // Cookies.set("token", response.data.token);
-        // router.push("/maps");
-        handleSave("email", response.data.data.email);
-        const a = handleLoad("email");
-        console.log(a);
+        handleSave("SW-EMAIL", response.data.data.email);
+        router.push("/maps");
       })
       .catch((error) => {
         console.log(error.response.data);
