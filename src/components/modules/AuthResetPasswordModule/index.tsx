@@ -359,5 +359,30 @@ const ResetPasswordSuccessPage = ({
   prevPage,
   nextPage,
 }: ResetPasswordModuleProps) => {
-  return <div></div>;
+  const router = useRouter();
+  return (
+    <div className="h-screen w-screen flex justify-center items-center relative">
+      <div>
+        <div className="flex justify-center">
+          <Image
+            src="/assets/images/success.svg"
+            alt="landing"
+            width={160}
+            height={160}
+          />
+        </div>
+        <div className="pt-4 pb-10">
+          <div className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4D61A3] to-[#3E35F7]">
+            Congrats!
+          </div>
+          <div className="text-center text-xl text-white text-base font-semibold py-2">
+            Password reset successful
+          </div>
+        </div>
+        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+          <SWButton label="Back" onClick={() => router.push("/auth/login")} />
+        </div>
+      </div>
+    </div>
+  );
 };
