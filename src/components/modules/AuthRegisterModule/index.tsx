@@ -1,12 +1,15 @@
+import { Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { SWButton } from "src/components/elements/Button";
 import { FormData, FormDefault, RegisterModuleProps } from "./interface";
 
 export const AuthRegisterModule: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [page, setPage] = useState(1);
 
   const {
@@ -56,17 +59,70 @@ export const AuthRegisterModule: React.FC = () => {
 
   switch (page) {
     case 1:
-      return <RegisterPage nextPage={nextPage} />;
+      return (
+        <RegisterPage
+          nextPage={nextPage}
+          control={control}
+          handleSubmit={handleSubmit}
+          watch={watch}
+          errors={errors}
+          onSubmit={onSubmit}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        />
+      );
     case 2:
-      return <RegisterBio nextPage={nextPage} />;
+      return (
+        <RegisterBio
+          nextPage={nextPage}
+          control={control}
+          handleSubmit={handleSubmit}
+          watch={watch}
+          errors={errors}
+          onSubmit={onSubmit}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        />
+      );
     case 3:
-      return <RegisterPhoto nextPage={nextPage} />;
+      return (
+        <RegisterPhoto
+          nextPage={nextPage}
+          control={control}
+          handleSubmit={handleSubmit}
+          watch={watch}
+          errors={errors}
+          onSubmit={onSubmit}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        />
+      );
     default:
-      return <RegisterPage nextPage={nextPage} />;
+      return (
+        <RegisterPage
+          nextPage={nextPage}
+          control={control}
+          handleSubmit={handleSubmit}
+          watch={watch}
+          errors={errors}
+          onSubmit={onSubmit}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        />
+      );
   }
 };
 
-const RegisterPage = ({ nextPage }: RegisterModuleProps) => {
+const RegisterPage = ({
+  nextPage,
+  control,
+  handleSubmit,
+  watch,
+  errors,
+  onSubmit,
+  showPassword,
+  setShowPassword,
+}: RegisterModuleProps) => {
   return (
     <div className="h-screen w-screen flex justify-center items-center relative">
       <div>
@@ -88,6 +144,62 @@ const RegisterPage = ({ nextPage }: RegisterModuleProps) => {
           <div className="text-center text-xl font-bold text-white py-6">
             Sign Up For Free
           </div>
+        </div>
+        <div>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-4"
+          >
+            <div>
+              <label>Username</label>
+              <Controller
+                name="username"
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field }) => (
+                  <Input {...field} placeholder="Enter your username" />
+                )}
+              />
+              {errors.username && (
+                <p className="text-sm text-red-400">
+                  {errors.username.message}
+                </p>
+              )}
+            </div>
+            <div>
+              <label>Password</label>
+              <Controller
+                name="password"
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field }) => (
+                  <InputGroup>
+                    <Input
+                      {...field}
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Enter your password"
+                    />
+                    <InputRightElement>
+                      {showPassword ? (
+                        <FaEyeSlash onClick={() => setShowPassword(false)} />
+                      ) : (
+                        <FaEye onClick={() => setShowPassword(true)} />
+                      )}
+                    </InputRightElement>
+                  </InputGroup>
+                )}
+              />
+              {errors.password && (
+                <p className="text-sm text-red-400">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+          </form>
         </div>
         <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
           <SWButton label="Create Account" onClick={nextPage} />

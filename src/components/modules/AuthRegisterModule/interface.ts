@@ -1,5 +1,12 @@
 export interface RegisterModuleProps {
   nextPage: () => void;
+  control: any;
+  handleSubmit: any;
+  watch: any;
+  errors: any;
+  onSubmit: any;
+  showPassword: boolean;
+  setShowPassword: any;
 }
 export interface FormDefault {
   username: string;
