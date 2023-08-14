@@ -1,13 +1,9 @@
-import { SWButton } from "src/components/elements/Button";
+import { LandingModule } from "src/components/modules/LandingModule";
 
 export default function Home() {
   return (
     <div className="container">
-      <SWButton
-        label="Next"
-        onClick={() => console.log("CHECK")}
-        // isDisabled={true}
-      />
+      <LandingModule />
     </div>
   );
 }
