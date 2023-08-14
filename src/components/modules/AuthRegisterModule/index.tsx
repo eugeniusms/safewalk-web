@@ -12,6 +12,7 @@ import { Controller, useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { SWButton } from "src/components/elements/Button";
 import UploadPhoto from "src/components/elements/Upload";
+import { BufferModule } from "../BufferModule";
 import { FormData, FormDefault, RegisterModuleProps } from "./interface";
 
 export const AuthRegisterModule: React.FC = () => {
@@ -154,6 +155,8 @@ export const AuthRegisterModule: React.FC = () => {
           setShowPassword={setShowPassword}
         />
       );
+    case 6:
+      return <BufferModule />;
     default:
       return (
         <RegisterPage
