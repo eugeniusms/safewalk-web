@@ -1,10 +1,54 @@
+import axios from "axios";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { SWButton } from "src/components/elements/Button";
-import { RegisterModuleProps } from "./interface";
+import { FormData, FormDefault, RegisterModuleProps } from "./interface";
 
 export const AuthRegisterModule: React.FC = () => {
   const [page, setPage] = useState(1);
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormDefault>({
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+      mobileNumber: "",
+      photoUrl: "",
+    },
+  });
+
+  const onSubmit = (data: FormDefault) => {
+    const {
+      username,
+      email,
+      password,
+      firstName,
+      lastName,
+      mobileNumber,
+      photoUrl,
+    } = data;
+    const sendData: FormData = {
+      username,
+      email,
+      password,
+      firstName,
+      lastName,
+      mobileNumber,
+      photoUrl,
+    };
+    axios.post("/api/auth/register", sendData).then((response) => {
+      Cookies.set("token", response.data.token);
+    });
+  };
 
   const nextPage = () => {
     setPage(page + 1);
