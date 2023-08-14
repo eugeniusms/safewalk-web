@@ -1,1 +1,3 @@
-export interface Props {}
+export interface LandingModuleProps {
+  nextPage: () => void;
+}
