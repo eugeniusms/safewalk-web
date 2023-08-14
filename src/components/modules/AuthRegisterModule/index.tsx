@@ -62,20 +62,31 @@ export const AuthRegisterModule: React.FC = () => {
     setPage(page + 1);
   };
 
+  const prevPage = () => {
+    setPage(page - 1);
+  };
+
   const username = watch("username");
   const email = watch("email");
   const password = watch("password");
+  const firstName = watch("firstName");
+  const lastName = watch("lastName");
+  const mobileNumber = watch("mobileNumber");
 
   console.log({
     username,
     email,
     password,
+    firstName,
+    lastName,
+    mobileNumber,
   });
 
   switch (page) {
     case 1:
       return (
         <RegisterPage
+          prevPage={prevPage}
           nextPage={nextPage}
           control={control}
           handleSubmit={handleSubmit}
@@ -89,6 +100,7 @@ export const AuthRegisterModule: React.FC = () => {
     case 2:
       return (
         <RegisterBio
+          prevPage={prevPage}
           nextPage={nextPage}
           control={control}
           handleSubmit={handleSubmit}
@@ -102,6 +114,7 @@ export const AuthRegisterModule: React.FC = () => {
     case 3:
       return (
         <RegisterPhoto
+          prevPage={prevPage}
           nextPage={nextPage}
           control={control}
           handleSubmit={handleSubmit}
@@ -115,6 +128,7 @@ export const AuthRegisterModule: React.FC = () => {
     default:
       return (
         <RegisterPage
+          prevPage={prevPage}
           nextPage={nextPage}
           control={control}
           handleSubmit={handleSubmit}
@@ -288,8 +302,119 @@ const RegisterPage = ({
   );
 };
 
-const RegisterBio = ({ nextPage }: RegisterModuleProps) => {
-  return <div></div>;
+const RegisterBio = ({
+  prevPage,
+  nextPage,
+  control,
+  handleSubmit,
+  watch,
+  errors,
+  onSubmit,
+}: RegisterModuleProps) => {
+  return (
+    <div className="px-8 py-8 h-screen relative">
+      <div onClick={prevPage}>
+        <Image
+          src="/assets/icons/back.svg"
+          alt="landing"
+          width={50}
+          height={50}
+        />
+      </div>
+      <div className="text-white text-3xl font-bold py-4">
+        Fill in your bio to get started
+      </div>
+      <div className="text-white text-sm">
+        This data will be displayed in your account profile for security
+      </div>
+      <div className="flex justify-center">
+        <div className="w-full py-8">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-4 text-white"
+          >
+            <div>
+              <Controller
+                name="firstName"
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field }) => (
+                  <InputGroup size="md">
+                    <Input
+                      {...field}
+                      placeholder="First Name"
+                      backgroundColor={"#252525"}
+                      opacity={0.8}
+                      border="none"
+                      borderRadius={12}
+                    />
+                  </InputGroup>
+                )}
+              />
+              {errors.firstName && (
+                <p className="text-sm text-white">{errors.firstName.message}</p>
+              )}
+            </div>
+            <div>
+              <Controller
+                name="lastName"
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field }) => (
+                  <InputGroup size="md">
+                    <Input
+                      {...field}
+                      placeholder="Last Name"
+                      backgroundColor={"#252525"}
+                      opacity={0.8}
+                      border="none"
+                      borderRadius={12}
+                    />
+                  </InputGroup>
+                )}
+              />
+              {errors.lastName && (
+                <p className="text-sm text-white">{errors.lastName.message}</p>
+              )}
+            </div>
+            <div>
+              <Controller
+                name="mobileNumber"
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field }) => (
+                  <InputGroup size="md">
+                    <Input
+                      {...field}
+                      placeholder="Mobile Number"
+                      backgroundColor={"#252525"}
+                      opacity={0.8}
+                      border="none"
+                      borderRadius={12}
+                    />
+                  </InputGroup>
+                )}
+              />
+              {errors.mobileNumber && (
+                <p className="text-sm text-white">
+                  {errors.mobileNumber.message}
+                </p>
+              )}
+            </div>
+          </form>
+        </div>
+      </div>
+      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+        <SWButton label="Next" onClick={nextPage} />
+      </div>
+    </div>
+  );
 };
 
 const RegisterPhoto = ({ nextPage }: RegisterModuleProps) => {

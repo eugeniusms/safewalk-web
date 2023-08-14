@@ -1,4 +1,5 @@
 export interface RegisterModuleProps {
+  prevPage: () => void;
   nextPage: () => void;
   control: any;
   handleSubmit: any;
