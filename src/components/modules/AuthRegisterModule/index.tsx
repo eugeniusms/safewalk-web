@@ -62,6 +62,16 @@ export const AuthRegisterModule: React.FC = () => {
     setPage(page + 1);
   };
 
+  const username = watch("username");
+  const email = watch("email");
+  const password = watch("password");
+
+  console.log({
+    username,
+    email,
+    password,
+  });
+
   switch (page) {
     case 1:
       return (
