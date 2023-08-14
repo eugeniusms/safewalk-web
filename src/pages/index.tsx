@@ -6,7 +6,7 @@ export default function Home() {
       <SWButton
         label="Next"
         onClick={() => console.log("CHECK")}
-        isDisabled={true}
+        // isDisabled={true}
       />
     </div>
   );
