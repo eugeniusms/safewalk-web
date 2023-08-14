@@ -6,4 +6,5 @@ export * from "./ContactCreateModule";
 export * from "./ContactListModule";
 export * from "./LandingModule";
 export * from "./MapsModule";
+export * from "./ProfileModule";
 

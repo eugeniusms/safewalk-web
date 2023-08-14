@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
+import Navbar from "src/components/elements/Navbar";
 
 export const BufferModule: React.FC = () => {
   const router = useRouter();
@@ -29,6 +30,7 @@ export const BufferModule: React.FC = () => {
           </div>
         </div>
       </div>
+      <Navbar />
     </div>
   );
 };
