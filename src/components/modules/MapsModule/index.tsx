@@ -1,5 +1,6 @@
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { useCallback, useEffect, useState } from "react";
+import Layout from "src/components/elements/Layout";
 import map_setup from "src/services/map_setup_data.json";
 
 export const MapsModule: React.FC = () => {
@@ -36,16 +37,18 @@ export const MapsModule: React.FC = () => {
   console.log("CENTER: ", center);
 
   return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={map_setup.container_style}
-      center={center}
-      zoom={zoom}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
-      options={map_setup.map_id}
-    >
-      <></>
-    </GoogleMap>
+    <Layout>
+      <GoogleMap
+        mapContainerStyle={map_setup.container_style}
+        center={center}
+        zoom={zoom}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+        options={map_setup.map_id}
+      >
+        <></>
+      </GoogleMap>
+    </Layout>
   ) : (
     <></>
   );
