@@ -32,9 +32,6 @@ export const MapsModule: React.FC = () => {
 
   console.log("CENTER: ", center);
 
-  const mapsContainer = document.getElementById("maps");
-  mapsContainer?.style.setProperty("height", "92vh");
-
   return isLoaded ? (
     <Layout>
       <GoogleMap
