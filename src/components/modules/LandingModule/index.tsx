@@ -28,7 +28,7 @@ export const LandingModule: React.FC = () => {
 
 const LandingPage1 = ({ nextPage }: LandingModuleProps) => {
   return (
-    <div className="h-screen w-screen flex justify-center items-center relative">
+    <div className="h-[80vh] w-screen flex justify-center items-center relative">
       <div>
         <div className="flex justify-center">
           <Image
