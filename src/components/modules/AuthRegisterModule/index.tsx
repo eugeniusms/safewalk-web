@@ -5,6 +5,7 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -14,6 +15,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { SWButton } from "src/components/elements/Button";
 import Layout from "src/components/elements/Layout";
 import UploadPhoto from "src/components/elements/Upload";
+import { storage } from "src/services/firebase";
+import { v4 } from "uuid";
 import { BufferModule } from "../BufferModule";
 import { FormData, FormDefault, RegisterModuleProps } from "./interface";
 
@@ -25,6 +28,7 @@ export const AuthRegisterModule: React.FC = () => {
     control,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<FormDefault>({
     defaultValues: {
@@ -76,6 +80,7 @@ export const AuthRegisterModule: React.FC = () => {
   const firstName = watch("firstName");
   const lastName = watch("lastName");
   const mobileNumber = watch("mobileNumber");
+  const photoUrl = watch("photoUrl");
 
   console.log({
     username,
@@ -84,6 +89,7 @@ export const AuthRegisterModule: React.FC = () => {
     firstName,
     lastName,
     mobileNumber,
+    photoUrl,
   });
 
   switch (page) {
@@ -127,6 +133,7 @@ export const AuthRegisterModule: React.FC = () => {
           onSubmit={onSubmit}
           showPassword={showPassword}
           setShowPassword={setShowPassword}
+          setValue={setValue}
         />
       );
     case 4:
@@ -465,11 +472,27 @@ const RegisterBio = ({
   );
 };
 
-const RegisterPhoto = ({ prevPage, nextPage }: RegisterModuleProps) => {
+const RegisterPhoto = ({
+  prevPage,
+  nextPage,
+  control,
+  setValue,
+}: RegisterModuleProps) => {
+  // Upload to firebase storage
   const handleUpload = (file: File) => {
-    // TODO: upload file connect firebase storage
-    console.log("File uploaded:", file);
+    if (file == null) {
+      return;
+    }
+    const imageRef = ref(storage, `images/profile/${file.name + v4()}`);
+    uploadBytes(imageRef, file).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        console.log("File available at", url);
+        setValue("photoUrl", url);
+      });
+      nextPage();
+    });
   };
+
   return (
     <Layout>
       <div className="px-8 py-8 h-[92vh] relative">

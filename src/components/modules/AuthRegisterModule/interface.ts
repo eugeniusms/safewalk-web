@@ -6,6 +6,7 @@ export interface RegisterModuleProps {
   watch: any;
   errors: any;
   onSubmit: any;
+  setValue?: any;
   showPassword: boolean;
   setShowPassword: any;
 }
