@@ -1,1 +1,2 @@
-export * from "./";
+export * from "./useLocalStorage";
+export * from "./useWindowSize";
