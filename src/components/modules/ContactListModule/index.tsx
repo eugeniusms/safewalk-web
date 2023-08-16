@@ -29,7 +29,7 @@ const EMERGENCY_DUMMY = [
 export const ContactListModule: React.FC = () => {
   const router = useRouter();
   return (
-    <div className="h-screen p-6">
+    <div className="h-[92vh] p-6">
       <div>
         <div className="text-2xl font-bold text-white">Hotline</div>
         {HOTLINE_DUMMY.map((hotline: any, id: number) => {

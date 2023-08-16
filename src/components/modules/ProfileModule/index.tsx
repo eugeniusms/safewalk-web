@@ -42,7 +42,7 @@ export const ProfileModule: React.FC = () => {
   }, []);
 
   return (
-    <div className="h-screen">
+    <div className="h-[92vh]">
       <div className="relative">
         <Image src={profile.photo_url} alt="logo" width={1000} height={1000} />
         <div className="absolute bottom-0 left-0 w-full h-30 bg-black"></div>

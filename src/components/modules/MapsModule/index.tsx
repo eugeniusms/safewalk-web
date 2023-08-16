@@ -1,3 +1,3 @@
 export const MapsModule: React.FC = () => {
-  return <div className="h-screen">TEST</div>;
+  return <div className="h-[92vh]">TEST</div>;
 };

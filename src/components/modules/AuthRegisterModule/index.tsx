@@ -187,7 +187,7 @@ const RegisterPage = ({
 }: RegisterModuleProps) => {
   const router = useRouter();
   return (
-    <div className="h-screen relative">
+    <div className="h-[92vh] relative">
       <div>
         <div className="flex justify-center pt-6">
           <Image
@@ -349,7 +349,7 @@ const RegisterBio = ({
   onSubmit,
 }: RegisterModuleProps) => {
   return (
-    <div className="px-8 py-8 h-screen relative">
+    <div className="px-8 py-8 h-[92vh] relative">
       <div onClick={prevPage}>
         <Image
           src="/assets/icons/back.svg"
@@ -461,7 +461,7 @@ const RegisterPhoto = ({ prevPage, nextPage }: RegisterModuleProps) => {
   };
   return (
     <div>
-      <div className="px-8 py-8 h-screen relative">
+      <div className="px-8 py-8 h-[92vh] relative">
         <div onClick={prevPage}>
           <Image
             src="/assets/icons/back.svg"
@@ -501,7 +501,7 @@ const RegisterPhoto = ({ prevPage, nextPage }: RegisterModuleProps) => {
 const RegisterPhotoSuccess = ({ prevPage, nextPage }: RegisterModuleProps) => {
   return (
     <div>
-      <div className="px-8 py-8 h-screen relative">
+      <div className="px-8 py-8 h-[92vh] relative">
         <div onClick={prevPage}>
           <Image
             src="/assets/icons/back.svg"
@@ -534,7 +534,7 @@ const RegisterPhotoSuccess = ({ prevPage, nextPage }: RegisterModuleProps) => {
 
 const RegisterSuccess = ({ prevPage, nextPage }: RegisterModuleProps) => {
   return (
-    <div className="h-screen w-screen flex justify-center items-center relative">
+    <div className="h-[92vh] w-screen flex justify-center items-center relative">
       <div>
         <div className="flex justify-center">
           <Image

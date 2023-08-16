@@ -110,7 +110,7 @@ const SendVerificationPage = ({
   };
   return (
     <div>
-      <div className="px-8 py-8 h-screen relative">
+      <div className="px-8 py-8 h-[92vh] relative">
         <div onClick={prevPage}>
           <Image
             src="/assets/icons/back.svg"
@@ -168,7 +168,7 @@ const VerificationPage = ({
 }: ResetPasswordModuleProps) => {
   return (
     <div>
-      <div className="px-8 py-8 h-screen relative">
+      <div className="px-8 py-8 h-[92vh] relative">
         <div onClick={prevPage}>
           <Image
             src="/assets/icons/back.svg"
@@ -256,7 +256,7 @@ const ResetPasswordPage = ({
   setShowConfirmPassword,
 }: ResetPasswordModuleProps) => {
   return (
-    <div className="px-8 py-8 h-screen relative">
+    <div className="px-8 py-8 h-[92vh] relative">
       <div onClick={prevPage}>
         <Image
           src="/assets/icons/back.svg"
@@ -361,7 +361,7 @@ const ResetPasswordSuccessPage = ({
 }: ResetPasswordModuleProps) => {
   const router = useRouter();
   return (
-    <div className="h-screen w-screen flex justify-center items-center relative">
+    <div className="h-[92vh] w-screen flex justify-center items-center relative">
       <div>
         <div className="flex justify-center">
           <Image

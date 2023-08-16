@@ -74,7 +74,7 @@ export const AuthLoginModule = () => {
     password,
   });
   return (
-    <div className="h-screen relative">
+    <div className="h-[92vh] relative">
       <div>
         <div className="flex justify-center pt-6">
           <Image
