@@ -11,6 +11,11 @@ import { Controller } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { SWButton } from "src/components/elements/Button";
 import Layout from "src/components/elements/Layout";
+import {
+  isEmailFormat,
+  isPasswordFormat,
+  isUsernameFormat,
+} from "src/components/utils/format";
 import { RegisterModuleProps } from "../../interface";
 
 export const RegisterPage = ({
@@ -32,12 +37,14 @@ export const RegisterPage = ({
   const password = watch("password");
 
   const handleNextPage = () => {
-    if (username.trim() && email.trim() && password.trim()) {
-      nextPage();
-    } else {
-      setValue("username", username.trim());
-      setValue("email", email.trim());
-      setValue("password", password.trim());
+    const trimmedUsername = username.trim();
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+
+    if (!(trimmedUsername && trimmedEmail && trimmedPassword)) {
+      setValue("username", trimmedUsername);
+      setValue("email", trimmedEmail);
+      setValue("password", trimmedPassword);
       toast({
         title: "Please fill all the fields",
         status: "error",
@@ -45,6 +52,32 @@ export const RegisterPage = ({
         duration: 4000,
         isClosable: true,
       });
+    } else if (!isUsernameFormat(trimmedUsername)) {
+      toast({
+        title: "Only alphanumeric characters are allowed for username",
+        status: "error",
+        position: "top",
+        duration: 4000,
+        isClosable: true,
+      });
+    } else if (!isEmailFormat(trimmedEmail)) {
+      toast({
+        title: "Invalid email format",
+        status: "error",
+        position: "top",
+        duration: 4000,
+        isClosable: true,
+      });
+    } else if (!isPasswordFormat(trimmedPassword)) {
+      toast({
+        title: "Password must be at least 8 characters",
+        status: "error",
+        position: "top",
+        duration: 4000,
+        isClosable: true,
+      });
+    } else {
+      nextPage();
     }
   };
 
