@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
-import Layout from "src/components/elements/Layout";
+import { Layout } from "src/components/elements/Layout";
 import Navbar from "src/components/elements/Navbar";
 
 export const BufferModule: React.FC = () => {

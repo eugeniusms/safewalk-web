@@ -2,10 +2,10 @@ import { Input, InputGroup, useToast } from "@chakra-ui/react";
 import Image from "next/image";
 import { Controller } from "react-hook-form";
 import { SWButton } from "src/components/elements/Button";
-import Layout from "src/components/elements/Layout";
+import { Layout } from "src/components/elements/Layout";
 import {
-  isMobileNumberFormat,
-  isPersonNameFormat,
+    isMobileNumberFormat,
+    isPersonNameFormat
 } from "src/components/utils/format";
 import { RegisterModuleProps } from "../../interface";
 

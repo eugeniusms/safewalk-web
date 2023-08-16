@@ -1,6 +1,6 @@
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import React, { useCallback, useEffect, useState } from "react";
-import Layout from "src/components/elements/Layout";
+import { Layout } from "src/components/elements/Layout";
 import map_setup from "src/services/map_setup_data.json";
 
 export const MapsModule: React.FC = () => {

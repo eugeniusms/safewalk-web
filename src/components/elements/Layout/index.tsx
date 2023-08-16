@@ -1,12 +1,16 @@
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import { useWindowSize } from "src/components/hooks/useWindowSize";
+import { AuthContext } from "src/providers/AuthProvider";
+import { BufferToLanding } from "../BufferToLanding";
 import DesktopScreen from "../DesktopScreen";
 import Navbar from "../Navbar";
 import { LayoutProps } from "./interface";
 
 const registerNavbar = ["/", "/maps", "/contact/list", "/profile"];
 
-const Layout = ({ children }: LayoutProps) => {
+export const Layout = ({ children }: LayoutProps) => {
+  const { isAuthenticated } = useContext(AuthContext);
   const router = useRouter();
   const { pathname, ...restRouter } = router;
   const { width } = useWindowSize();
@@ -16,6 +20,9 @@ const Layout = ({ children }: LayoutProps) => {
   }
 
   if (registerNavbar.includes(pathname)) {
+    if (!isAuthenticated) {
+      return <BufferToLanding />;
+    }
     return (
       <div>
         {children}
@@ -25,5 +32,3 @@ const Layout = ({ children }: LayoutProps) => {
   }
   return <div>{children}</div>;
 };
-
-export default Layout;

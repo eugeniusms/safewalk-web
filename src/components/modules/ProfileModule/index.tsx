@@ -1,7 +1,7 @@
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import Layout from "src/components/elements/Layout";
+import { Layout } from "src/components/elements/Layout";
 import Toggle from "src/components/elements/Toggle";
 import { useLocalStorage } from "src/components/hooks/useLocalStorage";
 

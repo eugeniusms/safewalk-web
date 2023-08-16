@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { SWButton } from "src/components/elements/Button";
-import Layout from "src/components/elements/Layout";
+import { Layout } from "src/components/elements/Layout";
 import { RegisterModuleProps } from "../../interface";
 
 export const RegisterPhotoSuccess = ({

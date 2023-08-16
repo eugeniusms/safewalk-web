@@ -13,7 +13,7 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { SWButton } from "src/components/elements/Button";
-import Layout from "src/components/elements/Layout";
+import { Layout } from "src/components/elements/Layout";
 import { useLocalStorage } from "src/components/hooks/useLocalStorage";
 import { FormData, FormDefault } from "./interface";
 

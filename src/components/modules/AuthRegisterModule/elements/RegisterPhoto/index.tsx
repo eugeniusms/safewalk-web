@@ -1,7 +1,7 @@
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Image from "next/image";
 import { SWButton } from "src/components/elements/Button";
-import Layout from "src/components/elements/Layout";
+import { Layout } from "src/components/elements/Layout";
 import UploadPhoto from "src/components/elements/Upload";
 import { storage } from "src/services/firebase";
 import { v4 } from "uuid";

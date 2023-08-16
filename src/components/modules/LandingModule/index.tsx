@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { SWButton } from "src/components/elements/Button";
-import Layout from "src/components/elements/Layout";
+import { Layout } from "src/components/elements/Layout";
 import { LandingModuleProps } from "./interface";
 
 export const LandingModule: React.FC = () => {

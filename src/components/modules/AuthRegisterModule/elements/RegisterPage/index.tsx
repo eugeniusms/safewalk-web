@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import { Controller } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { SWButton } from "src/components/elements/Button";
-import Layout from "src/components/elements/Layout";
+import { Layout } from "src/components/elements/Layout";
 import {
   isEmailFormat,
   isPasswordFormat,

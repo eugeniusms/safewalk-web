@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { SWButton } from "src/components/elements/Button";
-import Layout from "src/components/elements/Layout";
+import { Layout } from "src/components/elements/Layout";
 import { FormData, FormDefault, ResetPasswordModuleProps } from "./interface";
 
 export const AuthResetPasswordModule: React.FC = () => {

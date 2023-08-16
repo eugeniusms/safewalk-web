@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Layout from "src/components/elements/Layout";
+import { Layout } from "src/components/elements/Layout";
 
 const HOTLINE_DUMMY = [
   {
