@@ -532,7 +532,12 @@ const RegisterPhoto = ({
 };
 
 // TODO: replace dummy image with link from firebase storage
-const RegisterPhotoSuccess = ({ prevPage, nextPage }: RegisterModuleProps) => {
+const RegisterPhotoSuccess = ({
+  prevPage,
+  nextPage,
+  watch,
+}: RegisterModuleProps) => {
+  const photoUrl = watch("photoUrl");
   return (
     <Layout>
       <div className="px-8 py-8 h-[92vh] relative">
@@ -550,10 +555,11 @@ const RegisterPhotoSuccess = ({ prevPage, nextPage }: RegisterModuleProps) => {
         <div className="text-white text-sm font-light">
           This data will be displayed in your account profile for security
         </div>
-        <div>
+        <div className="bg-gray-200 overflow-hidden rounded-3xl w-64 h-64 mx-auto mt-8">
           <Image
-            src="/assets/images/dummy-profile-photo.png"
+            src={photoUrl}
             alt="profile-photo"
+            className="object-cover w-full h-full"
             width={290}
             height={290}
           />
