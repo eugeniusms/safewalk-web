@@ -3,6 +3,7 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  useToast,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -21,8 +22,32 @@ export const RegisterPage = ({
   onSubmit,
   showPassword,
   setShowPassword,
+  setValue,
 }: RegisterModuleProps) => {
   const router = useRouter();
+  const toast = useToast();
+
+  const username = watch("username");
+  const email = watch("email");
+  const password = watch("password");
+
+  const handleNextPage = () => {
+    if (username.trim() && email.trim() && password.trim()) {
+      nextPage();
+    } else {
+      setValue("username", username.trim());
+      setValue("email", email.trim());
+      setValue("password", password.trim());
+      toast({
+        title: "Please fill all the fields",
+        status: "error",
+        position: "top",
+        duration: 4000,
+        isClosable: true,
+      });
+    }
+  };
+
   return (
     <Layout>
       <div className="h-[92vh] relative">
@@ -166,7 +191,7 @@ export const RegisterPage = ({
             </div>
           </div>
           <div className="flex justify-center pt-8">
-            <SWButton label="Create Account" onClick={nextPage} />
+            <SWButton label="Create Account" onClick={handleNextPage} />
           </div>
           <div
             className="text-center text-xs text-transparent bg-clip-text bg-gradient-to-r from-[#4D61A3] to-[#3E35F7] py-4 underline"
