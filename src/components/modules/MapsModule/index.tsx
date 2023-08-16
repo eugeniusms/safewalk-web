@@ -32,20 +32,21 @@ export const MapsModule: React.FC = () => {
 
   console.log("CENTER: ", center);
 
+  const mapsContainer = document.getElementById("maps");
+  mapsContainer?.style.setProperty("height", "92vh");
+
   return isLoaded ? (
     <Layout>
-      <div className="h-[92vh]">
-        <GoogleMap
-          mapContainerStyle={map_setup.container_style}
-          center={center}
-          zoom={zoom}
-          onLoad={onLoad}
-          onUnmount={onUnmount}
-          options={map_setup.map_id}
-        >
-          <></>
-        </GoogleMap>
-      </div>
+      <GoogleMap
+        mapContainerStyle={map_setup.container_style}
+        center={center}
+        zoom={zoom}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+        options={map_setup.map_id}
+      >
+        <></>
+      </GoogleMap>
     </Layout>
   ) : (
     <></>
