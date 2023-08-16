@@ -44,18 +44,19 @@ export const ProfileModule: React.FC = () => {
   return (
     <Layout>
       <div className="h-[92vh]">
-        <div className="relative">
+        <div className="bg-gray-200 overflow-hidden w-96 h-96 mx-auto relative">
           <Image
             src={profile.photo_url}
-            alt="logo"
-            width={1000}
-            height={1000}
+            alt="profile-photo"
+            className="object-cover w-full h-full"
+            width={100}
+            height={100}
           />
-          <div className="absolute bottom-0 left-0 w-full h-30 bg-black"></div>
+          <div className="absolute bottom-0 left-0 w-full h-8 rounded-t-3xl bg-[#0D0D0D]"></div>
         </div>
         <div className="flex justify-between px-6">
           <div>
-            <div className="text-3xl text-white font-bold">
+            <div className="text-3xl text-white font-bold pb-2">
               {profile.first_name} {profile.last_name}
             </div>
             <div className="text-white/40 text-sm">{profile.mobile_number}</div>
