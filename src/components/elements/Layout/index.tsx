@@ -19,10 +19,11 @@ export const Layout = ({ children }: LayoutProps) => {
     return <DesktopScreen />;
   }
 
+  if (registerNavbar.includes(pathname) && !isAuthenticated) {
+    return <BufferToLanding />;
+  }
+
   if (registerNavbar.includes(pathname)) {
-    if (!isAuthenticated) {
-      return <BufferToLanding />;
-    }
     return (
       <div>
         {children}
