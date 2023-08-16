@@ -7,8 +7,11 @@ export const RegisterPhotoSuccess = ({
   prevPage,
   nextPage,
   watch,
+  handleSubmit,
+  onSubmit,
 }: RegisterModuleProps) => {
   const photoUrl = watch("photoUrl");
+
   return (
     <Layout>
       <div className="px-8 py-8 h-[92vh] relative">
@@ -36,7 +39,7 @@ export const RegisterPhotoSuccess = ({
           />
         </div>
         <div className="flex justify-center pt-8">
-          <SWButton label="Next" onClick={nextPage} />
+          <SWButton label="Next" onClick={handleSubmit(onSubmit)} />
         </div>
       </div>
     </Layout>

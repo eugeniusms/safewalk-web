@@ -42,7 +42,7 @@ export const AuthLoginModule = () => {
       password,
     };
     axios
-      .post("/api/auth/login", sendData)
+      .post("/api/auth/login-manual-user", sendData)
       .then((response) => {
         handleSave("SW-EMAIL", response.data.data.email);
         handleSave("SW-PASSWORD", response.data.data.password);

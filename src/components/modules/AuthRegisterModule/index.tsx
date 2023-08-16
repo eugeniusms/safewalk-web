@@ -1,5 +1,5 @@
+import { useToast } from "@chakra-ui/react";
 import axios from "axios";
-import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { BufferModule } from "../BufferModule";
@@ -11,6 +11,7 @@ import { RegisterSuccess } from "./elements/RegisterSuccess";
 import { FormData, FormDefault } from "./interface";
 
 export const AuthRegisterModule: React.FC = () => {
+  const toast = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [page, setPage] = useState(1);
 
@@ -51,9 +52,29 @@ export const AuthRegisterModule: React.FC = () => {
       mobileNumber,
       photoUrl,
     };
-    axios.post("/api/auth/register", sendData).then((response) => {
-      Cookies.set("token", response.data.token);
-    });
+    axios
+      .post("/api/auth/register-manual-user", sendData)
+      .then((response) => {
+        console.log(response);
+        toast({
+          title: "Register Success",
+          status: "success",
+          position: "top",
+          duration: 4000,
+          isClosable: true,
+        });
+        setPage(5);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast({
+          title: "Register Failed",
+          status: "error",
+          position: "top",
+          duration: 4000,
+          isClosable: true,
+        });
+      });
   };
 
   const nextPage = () => {
