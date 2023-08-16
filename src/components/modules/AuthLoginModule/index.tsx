@@ -205,7 +205,7 @@ export const AuthLoginModule = () => {
           >
             Forgot Your Password?
           </div>
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+          <div className="flex justify-center">
             <SWButton label="Login" onClick={handleSubmit(onSubmit)} />
           </div>
         </div>

@@ -235,7 +235,7 @@ const VerificationPage = ({
             size="lg"
           />
         </div>
-        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+        <div className="flex justify-center pt-40">
           <SWButton label="Next" onClick={nextPage} />
         </div>
       </div>
@@ -352,7 +352,7 @@ const ResetPasswordPage = ({
             </form>
           </div>
         </div>
-        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+        <div className="flex justify-center pt-28">
           <SWButton label="Next" onClick={nextPage} />
         </div>
       </div>
@@ -368,7 +368,7 @@ const ResetPasswordSuccessPage = ({
   return (
     <Layout>
       <div className="h-[92vh] w-screen flex justify-center items-center relative">
-        <div>
+        <div className="pt-20">
           <div className="flex justify-center">
             <Image
               src="/assets/images/success.svg"
@@ -385,7 +385,7 @@ const ResetPasswordSuccessPage = ({
               Password reset successful
             </div>
           </div>
-          <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+          <div className="flex justify-center pt-20">
             <SWButton label="Back" onClick={() => router.push("/auth/login")} />
           </div>
         </div>

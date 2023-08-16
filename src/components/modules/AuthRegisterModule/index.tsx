@@ -329,14 +329,14 @@ const RegisterPage = ({
               </form>
             </div>
           </div>
-          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+          <div className="flex justify-center pt-8">
             <SWButton label="Create Account" onClick={nextPage} />
-            <div
-              className="text-center text-xs text-transparent bg-clip-text bg-gradient-to-r from-[#4D61A3] to-[#3E35F7] py-4 underline"
-              onClick={() => router.push("/auth/login")}
-            >
-              already have an account?
-            </div>
+          </div>
+          <div
+            className="text-center text-xs text-transparent bg-clip-text bg-gradient-to-r from-[#4D61A3] to-[#3E35F7] py-4 underline"
+            onClick={() => router.push("/auth/login")}
+          >
+            already have an account?
           </div>
         </div>
       </div>
@@ -457,7 +457,7 @@ const RegisterBio = ({
             </form>
           </div>
         </div>
-        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+        <div className="flex justify-center pt-16">
           <SWButton label="Next" onClick={nextPage} />
         </div>
       </div>
@@ -500,7 +500,7 @@ const RegisterPhoto = ({ prevPage, nextPage }: RegisterModuleProps) => {
             }
           />
         </div>
-        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+        <div className="flex justify-center pt-16">
           <SWButton label="Next" onClick={nextPage} />
         </div>
       </div>
@@ -535,7 +535,7 @@ const RegisterPhotoSuccess = ({ prevPage, nextPage }: RegisterModuleProps) => {
             height={290}
           />
         </div>
-        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+        <div className="flex justify-center pt-8">
           <SWButton label="Next" onClick={nextPage} />
         </div>
       </div>
@@ -547,7 +547,7 @@ const RegisterSuccess = ({ prevPage, nextPage }: RegisterModuleProps) => {
   return (
     <Layout>
       <div className="h-[92vh] w-screen flex justify-center items-center relative">
-        <div>
+        <div className="pt-16">
           <div className="flex justify-center">
             <Image
               src="/assets/images/success.svg"
@@ -564,7 +564,7 @@ const RegisterSuccess = ({ prevPage, nextPage }: RegisterModuleProps) => {
               Your Profile Is Ready To Use
             </div>
           </div>
-          <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+          <div className="flex justify-center pt-16">
             <SWButton label="Next" onClick={nextPage} />
           </div>
         </div>
