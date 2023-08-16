@@ -1,0 +1,10 @@
+{
+  "name": "safewalk-map",
+  "api_key": "AIzaSyD1RpB8EKa_wHwtnfnOZUfrBEg1m9zxQz4",
+  "map_id": { "mapId": "6f595d9fea01980a" },
+  "center": { "lat": -6.360903, "lng": 106.827625 },
+  "container_style": {
+    "width": "100%",
+    "height": "100vh"
+  }
+}
