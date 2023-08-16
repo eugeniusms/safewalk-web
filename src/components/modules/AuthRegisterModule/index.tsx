@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { SWButton } from "src/components/elements/Button";
+import Layout from "src/components/elements/Layout";
 import UploadPhoto from "src/components/elements/Upload";
 import { BufferModule } from "../BufferModule";
 import { FormData, FormDefault, RegisterModuleProps } from "./interface";
@@ -187,155 +188,159 @@ const RegisterPage = ({
 }: RegisterModuleProps) => {
   const router = useRouter();
   return (
-    <div className="h-[92vh] relative">
-      <div>
-        <div className="flex justify-center pt-6">
-          <Image
-            src="/assets/images/safewalk-logo.svg"
-            alt="landing"
-            width={140}
-            height={140}
-          />
-        </div>
-        <div className="pt-4 pb-10">
-          <div className="text-center text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4D61A3] to-[#3E35F7]">
-            SafeWalk
+    <Layout>
+      <div className="h-[92vh] relative">
+        <div>
+          <div className="flex justify-center pt-6">
+            <Image
+              src="/assets/images/safewalk-logo.svg"
+              alt="landing"
+              width={140}
+              height={140}
+            />
           </div>
-          <div className="text-center text-white text-xs font-semibold">
-            Your Safety Companion
+          <div className="pt-4 pb-10">
+            <div className="text-center text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4D61A3] to-[#3E35F7]">
+              SafeWalk
+            </div>
+            <div className="text-center text-white text-xs font-semibold">
+              Your Safety Companion
+            </div>
+            <div className="text-center text-xl font-bold text-white pt-6">
+              Sign Up For Free
+            </div>
           </div>
-          <div className="text-center text-xl font-bold text-white pt-6">
-            Sign Up For Free
+          <div className="flex justify-center">
+            <div className="w-5/6">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="flex flex-col gap-4 text-white"
+              >
+                <div>
+                  <Controller
+                    name="username"
+                    control={control}
+                    rules={{
+                      required: true,
+                    }}
+                    render={({ field }) => (
+                      <InputGroup size="md">
+                        <InputLeftElement>
+                          <Image
+                            src="/assets/icons/profile.svg"
+                            width={20}
+                            height={20}
+                            alt="profile"
+                          />
+                        </InputLeftElement>
+                        <Input
+                          {...field}
+                          placeholder="Enter your username"
+                          backgroundColor={"#252525"}
+                          opacity={0.8}
+                          border="none"
+                          borderRadius={12}
+                        />
+                      </InputGroup>
+                    )}
+                  />
+                  {errors.username && (
+                    <p className="text-sm text-white">
+                      {errors.username.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <Controller
+                    name="email"
+                    control={control}
+                    rules={{
+                      required: true,
+                    }}
+                    render={({ field }) => (
+                      <InputGroup size="md">
+                        <InputLeftElement>
+                          <Image
+                            src="/assets/icons/mail.svg"
+                            width={20}
+                            height={20}
+                            alt="profile"
+                          />
+                        </InputLeftElement>
+                        <Input
+                          {...field}
+                          placeholder="Enter your email"
+                          backgroundColor={"#252525"}
+                          opacity={0.8}
+                          border="none"
+                          borderRadius={12}
+                        />
+                      </InputGroup>
+                    )}
+                  />
+                  {errors.email && (
+                    <p className="text-sm text-white">{errors.email.message}</p>
+                  )}
+                </div>
+                <div>
+                  <Controller
+                    name="password"
+                    control={control}
+                    rules={{
+                      required: true,
+                    }}
+                    render={({ field }) => (
+                      <InputGroup size="md">
+                        <InputLeftElement>
+                          <Image
+                            src="/assets/icons/lock.svg"
+                            width={20}
+                            height={20}
+                            alt="profile"
+                          />
+                        </InputLeftElement>
+                        <Input
+                          {...field}
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Enter your password"
+                          backgroundColor={"#252525"}
+                          opacity={0.8}
+                          border="none"
+                          borderRadius={12}
+                        />
+                        <InputRightElement>
+                          {showPassword ? (
+                            <FaEyeSlash
+                              onClick={() => setShowPassword(false)}
+                            />
+                          ) : (
+                            <FaEye onClick={() => setShowPassword(true)} />
+                          )}
+                        </InputRightElement>
+                      </InputGroup>
+                    )}
+                  />
+                  {errors.password && (
+                    <p className="text-sm text-red-400">
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
-        <div className="flex justify-center">
-          <div className="w-5/6">
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="flex flex-col gap-4 text-white"
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+            <SWButton label="Create Account" onClick={nextPage} />
+            <div
+              className="text-center text-xs text-transparent bg-clip-text bg-gradient-to-r from-[#4D61A3] to-[#3E35F7] py-4 underline"
+              onClick={() => router.push("/auth/login")}
             >
-              <div>
-                <Controller
-                  name="username"
-                  control={control}
-                  rules={{
-                    required: true,
-                  }}
-                  render={({ field }) => (
-                    <InputGroup size="md">
-                      <InputLeftElement>
-                        <Image
-                          src="/assets/icons/profile.svg"
-                          width={20}
-                          height={20}
-                          alt="profile"
-                        />
-                      </InputLeftElement>
-                      <Input
-                        {...field}
-                        placeholder="Enter your username"
-                        backgroundColor={"#252525"}
-                        opacity={0.8}
-                        border="none"
-                        borderRadius={12}
-                      />
-                    </InputGroup>
-                  )}
-                />
-                {errors.username && (
-                  <p className="text-sm text-white">
-                    {errors.username.message}
-                  </p>
-                )}
-              </div>
-              <div>
-                <Controller
-                  name="email"
-                  control={control}
-                  rules={{
-                    required: true,
-                  }}
-                  render={({ field }) => (
-                    <InputGroup size="md">
-                      <InputLeftElement>
-                        <Image
-                          src="/assets/icons/mail.svg"
-                          width={20}
-                          height={20}
-                          alt="profile"
-                        />
-                      </InputLeftElement>
-                      <Input
-                        {...field}
-                        placeholder="Enter your email"
-                        backgroundColor={"#252525"}
-                        opacity={0.8}
-                        border="none"
-                        borderRadius={12}
-                      />
-                    </InputGroup>
-                  )}
-                />
-                {errors.email && (
-                  <p className="text-sm text-white">{errors.email.message}</p>
-                )}
-              </div>
-              <div>
-                <Controller
-                  name="password"
-                  control={control}
-                  rules={{
-                    required: true,
-                  }}
-                  render={({ field }) => (
-                    <InputGroup size="md">
-                      <InputLeftElement>
-                        <Image
-                          src="/assets/icons/lock.svg"
-                          width={20}
-                          height={20}
-                          alt="profile"
-                        />
-                      </InputLeftElement>
-                      <Input
-                        {...field}
-                        type={showPassword ? "text" : "password"}
-                        placeholder="Enter your password"
-                        backgroundColor={"#252525"}
-                        opacity={0.8}
-                        border="none"
-                        borderRadius={12}
-                      />
-                      <InputRightElement>
-                        {showPassword ? (
-                          <FaEyeSlash onClick={() => setShowPassword(false)} />
-                        ) : (
-                          <FaEye onClick={() => setShowPassword(true)} />
-                        )}
-                      </InputRightElement>
-                    </InputGroup>
-                  )}
-                />
-                {errors.password && (
-                  <p className="text-sm text-red-400">
-                    {errors.password.message}
-                  </p>
-                )}
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
-          <SWButton label="Create Account" onClick={nextPage} />
-          <div
-            className="text-center text-xs text-transparent bg-clip-text bg-gradient-to-r from-[#4D61A3] to-[#3E35F7] py-4 underline"
-            onClick={() => router.push("/auth/login")}
-          >
-            already have an account?
+              already have an account?
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
@@ -349,108 +354,114 @@ const RegisterBio = ({
   onSubmit,
 }: RegisterModuleProps) => {
   return (
-    <div className="px-8 py-8 h-[92vh] relative">
-      <div onClick={prevPage}>
-        <Image
-          src="/assets/icons/back.svg"
-          alt="landing"
-          width={50}
-          height={50}
-        />
-      </div>
-      <div className="text-white text-3xl font-bold py-4">
-        Fill in your bio to get started
-      </div>
-      <div className="text-white text-sm font-light">
-        This data will be displayed in your account profile for security
-      </div>
-      <div className="flex justify-center">
-        <div className="w-full py-8">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-4 text-white"
-          >
-            <div>
-              <Controller
-                name="firstName"
-                control={control}
-                rules={{
-                  required: true,
-                }}
-                render={({ field }) => (
-                  <InputGroup size="md">
-                    <Input
-                      {...field}
-                      placeholder="First Name"
-                      backgroundColor={"#252525"}
-                      opacity={0.8}
-                      border="none"
-                      borderRadius={12}
-                    />
-                  </InputGroup>
+    <Layout>
+      <div className="px-8 py-8 h-[92vh] relative">
+        <div onClick={prevPage}>
+          <Image
+            src="/assets/icons/back.svg"
+            alt="landing"
+            width={50}
+            height={50}
+          />
+        </div>
+        <div className="text-white text-3xl font-bold py-4">
+          Fill in your bio to get started
+        </div>
+        <div className="text-white text-sm font-light">
+          This data will be displayed in your account profile for security
+        </div>
+        <div className="flex justify-center">
+          <div className="w-full py-8">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex flex-col gap-4 text-white"
+            >
+              <div>
+                <Controller
+                  name="firstName"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field }) => (
+                    <InputGroup size="md">
+                      <Input
+                        {...field}
+                        placeholder="First Name"
+                        backgroundColor={"#252525"}
+                        opacity={0.8}
+                        border="none"
+                        borderRadius={12}
+                      />
+                    </InputGroup>
+                  )}
+                />
+                {errors.firstName && (
+                  <p className="text-sm text-white">
+                    {errors.firstName.message}
+                  </p>
                 )}
-              />
-              {errors.firstName && (
-                <p className="text-sm text-white">{errors.firstName.message}</p>
-              )}
-            </div>
-            <div>
-              <Controller
-                name="lastName"
-                control={control}
-                rules={{
-                  required: true,
-                }}
-                render={({ field }) => (
-                  <InputGroup size="md">
-                    <Input
-                      {...field}
-                      placeholder="Last Name"
-                      backgroundColor={"#252525"}
-                      opacity={0.8}
-                      border="none"
-                      borderRadius={12}
-                    />
-                  </InputGroup>
+              </div>
+              <div>
+                <Controller
+                  name="lastName"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field }) => (
+                    <InputGroup size="md">
+                      <Input
+                        {...field}
+                        placeholder="Last Name"
+                        backgroundColor={"#252525"}
+                        opacity={0.8}
+                        border="none"
+                        borderRadius={12}
+                      />
+                    </InputGroup>
+                  )}
+                />
+                {errors.lastName && (
+                  <p className="text-sm text-white">
+                    {errors.lastName.message}
+                  </p>
                 )}
-              />
-              {errors.lastName && (
-                <p className="text-sm text-white">{errors.lastName.message}</p>
-              )}
-            </div>
-            <div>
-              <Controller
-                name="mobileNumber"
-                control={control}
-                rules={{
-                  required: true,
-                }}
-                render={({ field }) => (
-                  <InputGroup size="md">
-                    <Input
-                      {...field}
-                      placeholder="Mobile Number"
-                      backgroundColor={"#252525"}
-                      opacity={0.8}
-                      border="none"
-                      borderRadius={12}
-                    />
-                  </InputGroup>
+              </div>
+              <div>
+                <Controller
+                  name="mobileNumber"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field }) => (
+                    <InputGroup size="md">
+                      <Input
+                        {...field}
+                        placeholder="Mobile Number"
+                        backgroundColor={"#252525"}
+                        opacity={0.8}
+                        border="none"
+                        borderRadius={12}
+                      />
+                    </InputGroup>
+                  )}
+                />
+                {errors.mobileNumber && (
+                  <p className="text-sm text-white">
+                    {errors.mobileNumber.message}
+                  </p>
                 )}
-              />
-              {errors.mobileNumber && (
-                <p className="text-sm text-white">
-                  {errors.mobileNumber.message}
-                </p>
-              )}
-            </div>
-          </form>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+          <SWButton label="Next" onClick={nextPage} />
         </div>
       </div>
-      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
-        <SWButton label="Next" onClick={nextPage} />
-      </div>
-    </div>
+    </Layout>
   );
 };
 
@@ -460,7 +471,7 @@ const RegisterPhoto = ({ prevPage, nextPage }: RegisterModuleProps) => {
     console.log("File uploaded:", file);
   };
   return (
-    <div>
+    <Layout>
       <div className="px-8 py-8 h-[92vh] relative">
         <div onClick={prevPage}>
           <Image
@@ -493,14 +504,14 @@ const RegisterPhoto = ({ prevPage, nextPage }: RegisterModuleProps) => {
           <SWButton label="Next" onClick={nextPage} />
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
 // TODO: replace dummy image with link from firebase storage
 const RegisterPhotoSuccess = ({ prevPage, nextPage }: RegisterModuleProps) => {
   return (
-    <div>
+    <Layout>
       <div className="px-8 py-8 h-[92vh] relative">
         <div onClick={prevPage}>
           <Image
@@ -528,34 +539,36 @@ const RegisterPhotoSuccess = ({ prevPage, nextPage }: RegisterModuleProps) => {
           <SWButton label="Next" onClick={nextPage} />
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
 const RegisterSuccess = ({ prevPage, nextPage }: RegisterModuleProps) => {
   return (
-    <div className="h-[92vh] w-screen flex justify-center items-center relative">
-      <div>
-        <div className="flex justify-center">
-          <Image
-            src="/assets/images/success.svg"
-            alt="landing"
-            width={160}
-            height={160}
-          />
-        </div>
-        <div className="pt-4 pb-10">
-          <div className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4D61A3] to-[#3E35F7]">
-            Congrats!
+    <Layout>
+      <div className="h-[92vh] w-screen flex justify-center items-center relative">
+        <div>
+          <div className="flex justify-center">
+            <Image
+              src="/assets/images/success.svg"
+              alt="landing"
+              width={160}
+              height={160}
+            />
           </div>
-          <div className="text-center text-xl text-white text-base font-semibold py-2">
-            Your Profile Is Ready To Use
+          <div className="pt-4 pb-10">
+            <div className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4D61A3] to-[#3E35F7]">
+              Congrats!
+            </div>
+            <div className="text-center text-xl text-white text-base font-semibold py-2">
+              Your Profile Is Ready To Use
+            </div>
           </div>
-        </div>
-        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
-          <SWButton label="Next" onClick={nextPage} />
+          <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+            <SWButton label="Next" onClick={nextPage} />
+          </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };

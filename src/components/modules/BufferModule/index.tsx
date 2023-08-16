@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
+import Layout from "src/components/elements/Layout";
 import Navbar from "src/components/elements/Navbar";
 
 export const BufferModule: React.FC = () => {
   const router = useRouter();
   return (
-    <div>
+    <Layout>
       <div className="h-[92vh] w-screen flex justify-center items-center relative bg-gradient-to-b from-[#000000] to-[#1E1E1F]">
         <div className="animate-pulse" onClick={() => router.push("/maps")}>
           <div className="flex justify-center">
@@ -28,6 +29,6 @@ export const BufferModule: React.FC = () => {
         </div>
       </div>
       <Navbar />
-    </div>
+    </Layout>
   );
 };

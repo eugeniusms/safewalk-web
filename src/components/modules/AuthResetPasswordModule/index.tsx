@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { SWButton } from "src/components/elements/Button";
+import Layout from "src/components/elements/Layout";
 import { FormData, FormDefault, ResetPasswordModuleProps } from "./interface";
 
 export const AuthResetPasswordModule: React.FC = () => {
@@ -109,7 +110,7 @@ const SendVerificationPage = ({
     nextPage();
   };
   return (
-    <div>
+    <Layout>
       <div className="px-8 py-8 h-[92vh] relative">
         <div onClick={prevPage}>
           <Image
@@ -157,7 +158,7 @@ const SendVerificationPage = ({
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
@@ -167,7 +168,7 @@ const VerificationPage = ({
   verificationSendTo,
 }: ResetPasswordModuleProps) => {
   return (
-    <div>
+    <Layout>
       <div className="px-8 py-8 h-[92vh] relative">
         <div onClick={prevPage}>
           <Image
@@ -238,7 +239,7 @@ const VerificationPage = ({
           <SWButton label="Next" onClick={nextPage} />
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
@@ -256,102 +257,106 @@ const ResetPasswordPage = ({
   setShowConfirmPassword,
 }: ResetPasswordModuleProps) => {
   return (
-    <div className="px-8 py-8 h-[92vh] relative">
-      <div onClick={prevPage}>
-        <Image
-          src="/assets/icons/back.svg"
-          alt="landing"
-          width={50}
-          height={50}
-        />
-      </div>
-      <div className="text-white text-3xl font-bold py-4">
-        Reset your password here
-      </div>
-      <div className="text-white text-sm font-light">
-        Select which contact details should we use to reset your password
-      </div>
-      <div className="flex justify-center">
-        <div className="w-full py-8">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-4 text-white"
-          >
-            <div>
-              <Controller
-                name="firstName"
-                control={control}
-                rules={{
-                  required: true,
-                }}
-                render={({ field }) => (
-                  <InputGroup size="md">
-                    <Input
-                      {...field}
-                      type={showPassword ? "text" : "password"}
-                      placeholder="New Password"
-                      backgroundColor={"#252525"}
-                      opacity={0.8}
-                      border="none"
-                      borderRadius={12}
-                    />
-                    <InputRightElement>
-                      {showPassword ? (
-                        <FaEyeSlash onClick={() => setShowPassword(false)} />
-                      ) : (
-                        <FaEye onClick={() => setShowPassword(true)} />
-                      )}
-                    </InputRightElement>
-                  </InputGroup>
+    <Layout>
+      <div className="px-8 py-8 h-[92vh] relative">
+        <div onClick={prevPage}>
+          <Image
+            src="/assets/icons/back.svg"
+            alt="landing"
+            width={50}
+            height={50}
+          />
+        </div>
+        <div className="text-white text-3xl font-bold py-4">
+          Reset your password here
+        </div>
+        <div className="text-white text-sm font-light">
+          Select which contact details should we use to reset your password
+        </div>
+        <div className="flex justify-center">
+          <div className="w-full py-8">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex flex-col gap-4 text-white"
+            >
+              <div>
+                <Controller
+                  name="firstName"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field }) => (
+                    <InputGroup size="md">
+                      <Input
+                        {...field}
+                        type={showPassword ? "text" : "password"}
+                        placeholder="New Password"
+                        backgroundColor={"#252525"}
+                        opacity={0.8}
+                        border="none"
+                        borderRadius={12}
+                      />
+                      <InputRightElement>
+                        {showPassword ? (
+                          <FaEyeSlash onClick={() => setShowPassword(false)} />
+                        ) : (
+                          <FaEye onClick={() => setShowPassword(true)} />
+                        )}
+                      </InputRightElement>
+                    </InputGroup>
+                  )}
+                />
+                {errors.password && (
+                  <p className="text-sm text-white">
+                    {errors.password.message}
+                  </p>
                 )}
-              />
-              {errors.password && (
-                <p className="text-sm text-white">{errors.password.message}</p>
-              )}
-            </div>
-            <div>
-              <Controller
-                name="lastName"
-                control={control}
-                rules={{
-                  required: true,
-                }}
-                render={({ field }) => (
-                  <InputGroup size="md">
-                    <Input
-                      {...field}
-                      type={showConfirmPassword ? "text" : "password"}
-                      placeholder="Confirm Password"
-                      backgroundColor={"#252525"}
-                      opacity={0.8}
-                      border="none"
-                      borderRadius={12}
-                    />
-                    <InputRightElement>
-                      {showConfirmPassword ? (
-                        <FaEyeSlash
-                          onClick={() => setShowConfirmPassword(false)}
-                        />
-                      ) : (
-                        <FaEye onClick={() => setShowConfirmPassword(true)} />
-                      )}
-                    </InputRightElement>
-                  </InputGroup>
+              </div>
+              <div>
+                <Controller
+                  name="lastName"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field }) => (
+                    <InputGroup size="md">
+                      <Input
+                        {...field}
+                        type={showConfirmPassword ? "text" : "password"}
+                        placeholder="Confirm Password"
+                        backgroundColor={"#252525"}
+                        opacity={0.8}
+                        border="none"
+                        borderRadius={12}
+                      />
+                      <InputRightElement>
+                        {showConfirmPassword ? (
+                          <FaEyeSlash
+                            onClick={() => setShowConfirmPassword(false)}
+                          />
+                        ) : (
+                          <FaEye onClick={() => setShowConfirmPassword(true)} />
+                        )}
+                      </InputRightElement>
+                    </InputGroup>
+                  )}
+                />
+                {errors.confirmPassword && (
+                  <p className="text-sm text-white">
+                    {errors.confirmPassword.message}
+                  </p>
                 )}
-              />
-              {errors.confirmPassword && (
-                <p className="text-sm text-white">
-                  {errors.confirmPassword.message}
-                </p>
-              )}
-            </div>
-          </form>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+          <SWButton label="Next" onClick={nextPage} />
         </div>
       </div>
-      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
-        <SWButton label="Next" onClick={nextPage} />
-      </div>
-    </div>
+    </Layout>
   );
 };
 
@@ -361,28 +366,30 @@ const ResetPasswordSuccessPage = ({
 }: ResetPasswordModuleProps) => {
   const router = useRouter();
   return (
-    <div className="h-[92vh] w-screen flex justify-center items-center relative">
-      <div>
-        <div className="flex justify-center">
-          <Image
-            src="/assets/images/success.svg"
-            alt="landing"
-            width={160}
-            height={160}
-          />
-        </div>
-        <div className="pt-4 pb-10">
-          <div className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4D61A3] to-[#3E35F7]">
-            Congrats!
+    <Layout>
+      <div className="h-[92vh] w-screen flex justify-center items-center relative">
+        <div>
+          <div className="flex justify-center">
+            <Image
+              src="/assets/images/success.svg"
+              alt="landing"
+              width={160}
+              height={160}
+            />
           </div>
-          <div className="text-center text-xl text-white text-base font-semibold py-2">
-            Password reset successful
+          <div className="pt-4 pb-10">
+            <div className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4D61A3] to-[#3E35F7]">
+              Congrats!
+            </div>
+            <div className="text-center text-xl text-white text-base font-semibold py-2">
+              Password reset successful
+            </div>
           </div>
-        </div>
-        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
-          <SWButton label="Back" onClick={() => router.push("/auth/login")} />
+          <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+            <SWButton label="Back" onClick={() => router.push("/auth/login")} />
+          </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
