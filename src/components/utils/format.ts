@@ -15,3 +15,15 @@ export const isPasswordFormat = (password: string) => {
   const regex = /^.{8,}$/;
   return regex.test(password);
 };
+
+// Only alphabet characters are allowed.
+export const isPersonNameFormat = (name: string) => {
+  const regex = /^[a-zA-Z]+$/;
+  return regex.test(name);
+}
+
+// Only numeric characters are allowed.
+export const isMobileNumberFormat = (mobileNumber: string) => {
+  const regex = /^[0-9]+$/;
+  return regex.test(mobileNumber);
+}

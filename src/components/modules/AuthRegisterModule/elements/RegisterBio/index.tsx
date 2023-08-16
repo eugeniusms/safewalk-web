@@ -1,8 +1,12 @@
-import { Input, InputGroup } from "@chakra-ui/react";
+import { Input, InputGroup, useToast } from "@chakra-ui/react";
 import Image from "next/image";
 import { Controller } from "react-hook-form";
 import { SWButton } from "src/components/elements/Button";
 import Layout from "src/components/elements/Layout";
+import {
+  isMobileNumberFormat,
+  isPersonNameFormat,
+} from "src/components/utils/format";
 import { RegisterModuleProps } from "../../interface";
 
 export const RegisterBio = ({
@@ -13,7 +17,59 @@ export const RegisterBio = ({
   watch,
   errors,
   onSubmit,
+  setValue,
 }: RegisterModuleProps) => {
+  const toast = useToast();
+
+  const firstName = watch("firstName");
+  const lastName = watch("lastName");
+  const mobileNumber = watch("mobileNumber");
+
+  const handleNextPage = () => {
+    const trimmedFirstName = firstName.trim();
+    const trimmedLastName = lastName.trim();
+    const trimmedMobileNumber = mobileNumber.trim();
+
+    if (!(trimmedFirstName && trimmedLastName && trimmedMobileNumber)) {
+      setValue("firstName", trimmedFirstName);
+      setValue("lastName", trimmedLastName);
+      setValue("mobileNumber", trimmedMobileNumber);
+      toast({
+        title: "Please fill all the fields",
+        status: "error",
+        position: "top",
+        duration: 4000,
+        isClosable: true,
+      });
+    } else if (!isPersonNameFormat(trimmedFirstName)) {
+      toast({
+        title: "Only alphabet characters are allowed for first name",
+        status: "error",
+        position: "top",
+        duration: 4000,
+        isClosable: true,
+      });
+    } else if (!isPersonNameFormat(trimmedLastName)) {
+      toast({
+        title: "Only alphabet characters are allowed for last name",
+        status: "error",
+        position: "top",
+        duration: 4000,
+        isClosable: true,
+      });
+    } else if (!isMobileNumberFormat(trimmedMobileNumber)) {
+      toast({
+        title: "Only numeric characters are allowed for mobile number",
+        status: "error",
+        position: "top",
+        duration: 4000,
+        isClosable: true,
+      });
+    } else {
+    nextPage();
+    }
+  };
+
   return (
     <Layout>
       <div className="px-8 py-8 h-[92vh] relative">
@@ -119,7 +175,7 @@ export const RegisterBio = ({
           </div>
         </div>
         <div className="flex justify-center pt-16">
-          <SWButton label="Next" onClick={nextPage} />
+          <SWButton label="Next" onClick={handleNextPage} />
         </div>
       </div>
     </Layout>

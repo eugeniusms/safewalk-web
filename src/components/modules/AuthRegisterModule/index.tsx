@@ -110,6 +110,7 @@ export const AuthRegisterModule: React.FC = () => {
           onSubmit={onSubmit}
           showPassword={showPassword}
           setShowPassword={setShowPassword}
+          setValue={setValue}
         />
       );
     case 3:
