@@ -7,3 +7,8 @@
 html {
   font-family: "Poppins", sans-serif;
 }
+
+.gmnoprint, .gm-control-active {
+    display:none;
+}
+ 
