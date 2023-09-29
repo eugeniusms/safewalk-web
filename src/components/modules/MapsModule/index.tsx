@@ -1,3 +1,4 @@
+import { useToast } from "@chakra-ui/react";
 import {
   GoogleMap,
   Marker,
@@ -21,6 +22,7 @@ export const MapsModule: React.FC = () => {
     lat: number;
     lng: number;
   } | null>(null);
+  const toast = useToast();
 
   const { isLoaded } = useJsApiLoader({
     id: "6f595d9fea01980a",
@@ -77,6 +79,16 @@ export const MapsModule: React.FC = () => {
     }
   };
 
+  const enteringHighRiskArea = () => {
+    toast({
+      title: "Entering High Risk Area",
+      status: "error",
+      position: "top",
+      duration: 4000,
+      isClosable: true,
+    });
+  };
+
   console.log(userLocation);
 
   return isLoaded ? (
@@ -123,7 +135,7 @@ export const MapsModule: React.FC = () => {
               polygon.map((coord) => [coord.lat, coord.lng])
             )
           ) &&
-          console.log("ON POLYGON")}
+          enteringHighRiskArea()}
       </GoogleMap>
     </Layout>
   ) : (
