@@ -10,6 +10,35 @@ export const MapsModule: React.FC = () => {
   const [map, setMap] = useState(null);
   const [zoom, setZoom] = useState(14.2);
   const [center, setCenter] = useState(map_setup.center);
+  const [polygons, setPolygons] = useState([]);
+
+  const polygonList = [
+    [
+      { lat: -6.356488427865999, lng: 106.82377963506234 },
+      { lat: -6.355976518224316, lng: 106.81888727640391 },
+      { lat: -6.356573549787702, lng: 106.81571147654967 },
+      { lat: -6.361009296004702, lng: 106.8147242951762 },
+      { lat: -6.363440494561178, lng: 106.81729923825334 },
+      { lat: -6.363142000479635, lng: 106.82167670245563 },
+    ],
+    [
+      { lat: -6.356488427865999, lng: 106.82377963506234 },
+      { lat: -6.355976518224316, lng: 106.81888727640391 },
+      { lat: -6.356573549787702, lng: 106.81571147654967 },
+      { lat: -6.361009296004702, lng: 106.8147242951762 },
+      { lat: -6.363440494561178, lng: 106.81729923825334 },
+      { lat: -6.363142000479635, lng: 106.82167670245563 },
+    ],
+    [
+      { lat: -6.356488427865999, lng: 106.82377963506234 },
+      { lat: -6.355976518224316, lng: 106.81888727640391 },
+      { lat: -6.356573549787702, lng: 106.81571147654967 },
+      { lat: -6.361009296004702, lng: 106.8147242951762 },
+      { lat: -6.363440494561178, lng: 106.81729923825334 },
+      { lat: -6.363142000479635, lng: 106.82167670245563 },
+    ],
+    // Tambahkan data koordinat polygon lainnya di sini
+  ];
 
   const { isLoaded } = useJsApiLoader({
     id: "6f595d9fea01980a",
@@ -30,21 +59,9 @@ export const MapsModule: React.FC = () => {
   useEffect(() => {
     setTimeout(() => {
       setZoom(14.7);
+      setPolygons(polygonList);
     }, 300);
   }, []);
-
-  // Data koordinat untuk polygon
-  const polygons = [
-    [
-      { lat: -6.356488427865999, lng: 106.82377963506234 },
-      { lat: -6.355976518224316, lng: 106.81888727640391 },
-      { lat: -6.356573549787702, lng: 106.81571147654967 },
-      { lat: -6.361009296004702, lng: 106.8147242951762 },
-      { lat: -6.363440494561178, lng: 106.81729923825334 },
-      { lat: -6.363142000479635, lng: 106.82167670245563 },
-    ],
-    // Tambahkan data koordinat polygon lainnya di sini
-  ];
 
   return isLoaded ? (
     <Layout>
@@ -62,10 +79,10 @@ export const MapsModule: React.FC = () => {
             key={index}
             path={polygon}
             options={{
-              strokeColor: "#FF0000",
+              strokeColor: "#822237",
               strokeOpacity: 0.8,
               strokeWeight: 2,
-              fillColor: "#FF0000",
+              fillColor: "#571f23",
               fillOpacity: 0.35,
             }}
           />
