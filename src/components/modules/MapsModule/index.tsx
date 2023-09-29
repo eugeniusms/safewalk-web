@@ -10,7 +10,9 @@ export const MapsModule: React.FC = () => {
   const [map, setMap] = useState(null);
   const [zoom, setZoom] = useState(14.2);
   const [center, setCenter] = useState(map_setup.center);
-  const [polygons, setPolygons] = useState([]);
+  const [polygons, setPolygons] = useState<
+    Array<Array<{ lat: number; lng: number }>>
+  >([]);
 
   const polygonList = [
     [
