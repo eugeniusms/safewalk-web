@@ -40,8 +40,13 @@ export const MapsModule: React.FC = () => {
   useEffect(() => {
     setTimeout(() => {
       setZoom(14.7);
-      trackUserLocation(); // Panggil fungsi untuk melacak lokasi pengguna
     }, 300);
+  }, []);
+
+  useEffect(() => {
+    setInterval(() => {
+      trackUserLocation(); // Panggil fungsi untuk melacak lokasi pengguna
+    }, 1000);
   }, []);
 
   useEffect(() => {
