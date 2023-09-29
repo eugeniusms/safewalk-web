@@ -3,6 +3,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Layout } from "src/components/elements/Layout";
 import map_setup from "src/services/map_setup_data.json";
 
+// Import komponen Polygon
+import { Polygon } from "@react-google-maps/api";
+
 export const MapsModule: React.FC = () => {
   const [map, setMap] = useState(null);
   const [zoom, setZoom] = useState(14.2);
@@ -30,7 +33,25 @@ export const MapsModule: React.FC = () => {
     }, 300);
   }, []);
 
-  console.log("CENTER: ", center);
+  // Data koordinat untuk polygon
+  const polygons = [
+    [
+      { lat: -6.360903, lng: 106.827625 },
+      { lat: -7.460903, lng: 106.827625 },
+      { lat: -6.360903, lng: 107.927625 },
+    ],
+    [
+      { lat: -1, lng: -1.5 },
+      { lat: -1, lng: -3 },
+      { lat: -3, lng: -1 },
+    ],
+    [
+      { lat: -6.360903, lng: 106.827625 },
+      { lat: -7.460903, lng: 106.827625 },
+      { lat: -6.360903, lng: 107.927625 },
+    ],
+    // Tambahkan data koordinat polygon lainnya di sini
+  ];
 
   return isLoaded ? (
     <Layout>
@@ -42,7 +63,20 @@ export const MapsModule: React.FC = () => {
         onUnmount={onUnmount}
         options={map_setup.map_id}
       >
-        <></>
+        {/* Tampilkan polygon-polygon di peta */}
+        {polygons.map((polygon, index) => (
+          <Polygon
+            key={index}
+            path={polygon}
+            options={{
+              strokeColor: "#FF0000",
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: "#FF0000",
+              fillOpacity: 0.35,
+            }}
+          />
+        ))}
       </GoogleMap>
     </Layout>
   ) : (
