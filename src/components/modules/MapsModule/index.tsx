@@ -5,6 +5,7 @@ import {
   useJsApiLoader,
 } from "@react-google-maps/api";
 import axios from "axios";
+import pointInPolygon from "point-in-polygon";
 import React, { useCallback, useEffect, useState } from "react";
 import { Layout } from "src/components/elements/Layout";
 import map_setup from "src/services/map_setup_data.json";
@@ -113,6 +114,21 @@ export const MapsModule: React.FC = () => {
             }}
           />
         )}
+
+        {/* Periksa apakah userLocation berada dalam suatu polygon */}
+        {userLocation &&
+          polygons.some((polygon) =>
+            pointInPolygon(
+              [5.5, 5.5],
+              [
+                [1, 1],
+                [1, 2],
+                [2, 2],
+                [2, 1],
+              ]
+            )
+          ) &&
+          console.log("ON POLYGON")}
       </GoogleMap>
     </Layout>
   ) : (
