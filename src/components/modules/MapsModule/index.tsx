@@ -119,13 +119,8 @@ export const MapsModule: React.FC = () => {
         {userLocation &&
           polygons.some((polygon) =>
             pointInPolygon(
-              [5.5, 5.5],
-              [
-                [1, 1],
-                [1, 2],
-                [2, 2],
-                [2, 1],
-              ]
+              [userLocation.lat, userLocation.lng],
+              polygon.map((coord) => [coord.lat, coord.lng])
             )
           ) &&
           console.log("ON POLYGON")}
