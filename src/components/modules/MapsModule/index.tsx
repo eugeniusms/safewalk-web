@@ -63,6 +63,10 @@ export const MapsModule: React.FC = () => {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
+        setCenter({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
       });
     }
   };
