@@ -61,9 +61,9 @@ export const MapsModule: React.FC = () => {
             key={index}
             path={polygon}
             options={{
-              strokeColor: "#822237",
-              strokeOpacity: 0.8,
-              strokeWeight: 2,
+              strokeColor: "#571f23",
+              strokeOpacity: 0.35,
+              strokeWeight: 0,
               fillColor: "#571f23",
               fillOpacity: 0.35,
             }}
