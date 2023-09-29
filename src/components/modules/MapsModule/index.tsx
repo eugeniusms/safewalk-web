@@ -1,4 +1,9 @@
-import { GoogleMap, Polygon, useJsApiLoader } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  Marker,
+  Polygon,
+  useJsApiLoader,
+} from "@react-google-maps/api";
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { Layout } from "src/components/elements/Layout";
@@ -11,6 +16,10 @@ export const MapsModule: React.FC = () => {
   const [polygons, setPolygons] = useState<
     Array<Array<{ lat: number; lng: number }>>
   >([]);
+  const [userLocation, setUserLocation] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
 
   const { isLoaded } = useJsApiLoader({
     id: "6f595d9fea01980a",
@@ -31,6 +40,7 @@ export const MapsModule: React.FC = () => {
   useEffect(() => {
     setTimeout(() => {
       setZoom(14.7);
+      trackUserLocation(); // Panggil fungsi untuk melacak lokasi pengguna
     }, 300);
   }, []);
 
@@ -44,6 +54,20 @@ export const MapsModule: React.FC = () => {
       setPolygons(convertedArr);
     });
   }, []);
+
+  // Fungsi untuk melacak lokasi pengguna
+  const trackUserLocation = () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setUserLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      });
+    }
+  };
+
+  console.log(userLocation);
 
   return isLoaded ? (
     <Layout>
@@ -69,6 +93,17 @@ export const MapsModule: React.FC = () => {
             }}
           />
         ))}
+
+        {/* Tampilkan marker lokasi pengguna */}
+        {userLocation && (
+          <Marker
+            position={userLocation}
+            icon={{
+              url: "/assets/icons/pin.png", // Ganti dengan URL gambar marker pengguna Anda
+              scaledSize: new window.google.maps.Size(64, 64), // Ukuran marker
+            }}
+          />
+        )}
       </GoogleMap>
     </Layout>
   ) : (
