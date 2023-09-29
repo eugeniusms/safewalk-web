@@ -1,10 +1,8 @@
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import { GoogleMap, Polygon, useJsApiLoader } from "@react-google-maps/api";
+import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { Layout } from "src/components/elements/Layout";
 import map_setup from "src/services/map_setup_data.json";
-
-// Import komponen Polygon
-import { Polygon } from "@react-google-maps/api";
 
 export const MapsModule: React.FC = () => {
   const [map, setMap] = useState(null);
@@ -13,34 +11,6 @@ export const MapsModule: React.FC = () => {
   const [polygons, setPolygons] = useState<
     Array<Array<{ lat: number; lng: number }>>
   >([]);
-
-  const polygonList = [
-    [
-      { lat: -6.356488427865999, lng: 106.82377963506234 },
-      { lat: -6.355976518224316, lng: 106.81888727640391 },
-      { lat: -6.356573549787702, lng: 106.81571147654967 },
-      { lat: -6.361009296004702, lng: 106.8147242951762 },
-      { lat: -6.363440494561178, lng: 106.81729923825334 },
-      { lat: -6.363142000479635, lng: 106.82167670245563 },
-    ],
-    [
-      { lat: -6.356488427865999, lng: 106.82377963506234 },
-      { lat: -6.355976518224316, lng: 106.81888727640391 },
-      { lat: -6.356573549787702, lng: 106.81571147654967 },
-      { lat: -6.361009296004702, lng: 106.8147242951762 },
-      { lat: -6.363440494561178, lng: 106.81729923825334 },
-      { lat: -6.363142000479635, lng: 106.82167670245563 },
-    ],
-    [
-      { lat: -6.356488427865999, lng: 106.82377963506234 },
-      { lat: -6.355976518224316, lng: 106.81888727640391 },
-      { lat: -6.356573549787702, lng: 106.81571147654967 },
-      { lat: -6.361009296004702, lng: 106.8147242951762 },
-      { lat: -6.363440494561178, lng: 106.81729923825334 },
-      { lat: -6.363142000479635, lng: 106.82167670245563 },
-    ],
-    // Tambahkan data koordinat polygon lainnya di sini
-  ];
 
   const { isLoaded } = useJsApiLoader({
     id: "6f595d9fea01980a",
@@ -61,8 +31,18 @@ export const MapsModule: React.FC = () => {
   useEffect(() => {
     setTimeout(() => {
       setZoom(14.7);
-      setPolygons(polygonList);
     }, 300);
+  }, []);
+
+  useEffect(() => {
+    axios.get("/api/maps/polygon").then((response: any) => {
+      const data = response.data;
+      const convertedArr = [];
+      for (let d of data) {
+        convertedArr.push(d.coordinates);
+      }
+      setPolygons(convertedArr);
+    });
   }, []);
 
   return isLoaded ? (
