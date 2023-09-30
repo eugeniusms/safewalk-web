@@ -74,10 +74,6 @@ export const MapsModule: React.FC = () => {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
-        setCenter({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
       });
     }
   };
@@ -95,11 +91,6 @@ export const MapsModule: React.FC = () => {
 
   console.log(userLocation);
 
-  const showPinHandler = () => {
-    setShowShareAddress(!showShareAddress);
-    getAddressFromCoordinates(userLocation);
-  };
-
   const shareLocHandler = () => {
     if (userLocation) {
       const latitude = userLocation.lat;
@@ -114,6 +105,13 @@ export const MapsModule: React.FC = () => {
       // Open WhatsApp in a new tab or the WhatsApp app if available
       window.open(whatsappUrl, "_blank");
     }
+  };
+
+  const setCenterHandler = () => {
+    if (userLocation) {
+      setCenter(userLocation);
+    }
+    getAddressFromCoordinates(userLocation);
   };
 
   return isLoaded ? (
@@ -179,10 +177,10 @@ export const MapsModule: React.FC = () => {
           <Marker
             position={userLocation}
             icon={{
-              url: showShareAddress
+              url: !showShareAddress
                 ? "/assets/icons/pin-person.png"
                 : "/assets/icons/pin.png",
-              scaledSize: showShareAddress
+              scaledSize: !showShareAddress
                 ? new window.google.maps.Size(80, 80)
                 : new window.google.maps.Size(64, 64),
             }}
@@ -190,9 +188,9 @@ export const MapsModule: React.FC = () => {
         )}
         <button
           className={`absolute z-50 ${
-            showShareAddress ? "bottom-28" : "bottom-72"
+            !showShareAddress ? "bottom-28" : "bottom-72"
           } right-2 mx-auto`}
-          onClick={showPinHandler}
+          onClick={setCenterHandler}
         >
           <Image
             src="/assets/icons/show-gps.svg"
@@ -201,7 +199,7 @@ export const MapsModule: React.FC = () => {
             alt="caution"
           />
         </button>
-        {!showShareAddress && (
+        {showShareAddress && (
           <div className="absolute z-50 left-0 right-0 bottom-24 mx-auto">
             <div className="w-full text-white">
               <div className="flex items-center bg-[#0D0D0D] w-11/12 mx-4 my-4 rounded-2xl">
