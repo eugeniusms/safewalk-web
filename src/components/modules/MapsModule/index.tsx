@@ -23,6 +23,8 @@ export const MapsModule: React.FC = () => {
     lng: number;
   } | null>(null);
   const [isNormalPin, setIsNormalPin] = useState(true);
+  const [address, setAddress] = useState("");
+  const libraries = ["places"];
 
   const { isLoaded } = useJsApiLoader({
     id: "6f595d9fea01980a",
@@ -79,10 +81,22 @@ export const MapsModule: React.FC = () => {
     }
   };
 
+  const getAddressFromCoordinates = (coordinates: any) => {
+    const geocoder = new window.google.maps.Geocoder();
+    geocoder.geocode({ location: coordinates }, (results: any, status) => {
+      if (status === "OK" && results[0]) {
+        setAddress(results[0].formatted_address.slice(0, 64) + "...");
+      } else {
+        setAddress("Address not found");
+      }
+    });
+  };
+
   console.log(userLocation);
 
   const showPinHandler = () => {
     setIsNormalPin(!isNormalPin);
+    getAddressFromCoordinates(userLocation);
   };
 
   return isLoaded ? (
@@ -188,9 +202,7 @@ export const MapsModule: React.FC = () => {
                       height={32}
                       alt="caution"
                     />
-                    <div className="text-sm font-semibold">
-                      4517 Washington Ave, Manchester, Kentucky 39495
-                    </div>
+                    <div className="text-sm font-semibold">{address}</div>
                   </div>
                   <div className="flex justify-center items-center gap-3 px-4 py-4">
                     <Image
