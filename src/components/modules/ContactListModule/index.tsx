@@ -81,22 +81,32 @@ export const ContactListModule: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <div>
-                    <Image
-                      src="/assets/icons/contact-call-1.png"
-                      alt="logo"
-                      width={80}
-                      height={80}
-                    />
-                  </div>
-                  <div>
-                    <Image
-                      src="/assets/icons/contact-wa.png"
-                      alt="logo"
-                      width={60}
-                      height={60}
-                    />
-                  </div>
+                  {/* Tombol untuk panggilan telepon */}
+                  <a href={`tel:${hotline.mobile_number}`}>
+                    <div>
+                      <Image
+                        src="/assets/icons/contact-call-1.png"
+                        alt="logo"
+                        width={80}
+                        height={80}
+                      />
+                    </div>
+                  </a>
+                  {/* Tombol untuk pesan WhatsApp */}
+                  <a
+                    href={`https://wa.me/${hotline.mobile_number}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div>
+                      <Image
+                        src="/assets/icons/contact-wa.png"
+                        alt="logo"
+                        width={60}
+                        height={60}
+                      />
+                    </div>
+                  </a>
                 </div>
               </div>
             );
@@ -130,22 +140,32 @@ export const ContactListModule: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <div>
-                    <Image
-                      src="/assets/icons/contact-call-1.png"
-                      alt="logo"
-                      width={80}
-                      height={80}
-                    />
-                  </div>
-                  <div>
-                    <Image
-                      src="/assets/icons/contact-wa.png"
-                      alt="logo"
-                      width={60}
-                      height={60}
-                    />
-                  </div>
+                  {/* Tombol untuk panggilan telepon */}
+                  <a href={`tel:${emergency.mobile_number}`}>
+                    <div>
+                      <Image
+                        src="/assets/icons/contact-call-1.png"
+                        alt="logo"
+                        width={80}
+                        height={80}
+                      />
+                    </div>
+                  </a>
+                  {/* Tombol untuk pesan WhatsApp */}
+                  <a
+                    href={`https://wa.me/${emergency.mobile_number}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div>
+                      <Image
+                        src="/assets/icons/contact-wa.png"
+                        alt="logo"
+                        width={60}
+                        height={60}
+                      />
+                    </div>
+                  </a>
                 </div>
               </div>
             );
