@@ -1,4 +1,9 @@
-import { Input, InputGroup, useToast } from "@chakra-ui/react";
+import {
+  Input,
+  InputGroup,
+  InputLeftElement,
+  useToast,
+} from "@chakra-ui/react";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -93,9 +98,17 @@ export const ContactCreateModule = () => {
                   }}
                   render={({ field }) => (
                     <InputGroup size="md">
+                      <InputLeftElement>
+                        <Image
+                          src="/assets/icons/menu-profile.svg"
+                          width={15}
+                          height={15}
+                          alt="profile"
+                        />
+                      </InputLeftElement>
                       <Input
                         {...field}
-                        placeholder="First Name"
+                        placeholder="Name"
                         backgroundColor={"#252525"}
                         opacity={0.8}
                         border="none"
@@ -117,9 +130,17 @@ export const ContactCreateModule = () => {
                   }}
                   render={({ field }) => (
                     <InputGroup size="md">
+                      <InputLeftElement>
+                        <Image
+                          src="/assets/icons/menu-call.svg"
+                          width={15}
+                          height={15}
+                          alt="profile"
+                        />
+                      </InputLeftElement>
                       <Input
                         {...field}
-                        placeholder="Last Name"
+                        placeholder="Phone"
                         backgroundColor={"#252525"}
                         opacity={0.8}
                         border="none"
@@ -143,9 +164,17 @@ export const ContactCreateModule = () => {
                   }}
                   render={({ field }) => (
                     <InputGroup size="md">
+                      <InputLeftElement>
+                        <Image
+                          src="/assets/icons/mail.svg"
+                          width={20}
+                          height={20}
+                          alt="profile"
+                        />
+                      </InputLeftElement>
                       <Input
                         {...field}
-                        placeholder="Mobile Number"
+                        placeholder="Email"
                         backgroundColor={"#252525"}
                         opacity={0.8}
                         border="none"
