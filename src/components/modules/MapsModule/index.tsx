@@ -10,6 +10,7 @@ import pointInPolygon from "point-in-polygon";
 import React, { useCallback, useEffect, useState } from "react";
 import { Layout } from "src/components/elements/Layout";
 import map_setup from "src/services/map_setup_data.json";
+import useShareAddressStore from "src/stores/maps";
 
 export const MapsModule: React.FC = () => {
   const [map, setMap] = useState(null);
@@ -22,9 +23,9 @@ export const MapsModule: React.FC = () => {
     lat: number;
     lng: number;
   } | null>(null);
-  const [isNormalPin, setIsNormalPin] = useState(true);
   const [address, setAddress] = useState("");
   const libraries = ["places"];
+  const { showShareAddress, setShowShareAddress } = useShareAddressStore();
 
   const { isLoaded } = useJsApiLoader({
     id: "6f595d9fea01980a",
@@ -95,7 +96,7 @@ export const MapsModule: React.FC = () => {
   console.log(userLocation);
 
   const showPinHandler = () => {
-    setIsNormalPin(!isNormalPin);
+    setShowShareAddress(!showShareAddress);
     getAddressFromCoordinates(userLocation);
   };
 
@@ -178,10 +179,10 @@ export const MapsModule: React.FC = () => {
           <Marker
             position={userLocation}
             icon={{
-              url: isNormalPin
+              url: showShareAddress
                 ? "/assets/icons/pin-person.png"
                 : "/assets/icons/pin.png",
-              scaledSize: isNormalPin
+              scaledSize: showShareAddress
                 ? new window.google.maps.Size(80, 80)
                 : new window.google.maps.Size(64, 64),
             }}
@@ -189,7 +190,7 @@ export const MapsModule: React.FC = () => {
         )}
         <button
           className={`absolute z-50 ${
-            isNormalPin ? "bottom-28" : "bottom-72"
+            showShareAddress ? "bottom-28" : "bottom-72"
           } right-2 mx-auto`}
           onClick={showPinHandler}
         >
@@ -200,7 +201,7 @@ export const MapsModule: React.FC = () => {
             alt="caution"
           />
         </button>
-        {!isNormalPin && (
+        {!showShareAddress && (
           <div className="absolute z-50 left-0 right-0 bottom-24 mx-auto">
             <div className="w-full text-white">
               <div className="flex items-center bg-[#0D0D0D] w-11/12 mx-4 my-4 rounded-2xl">

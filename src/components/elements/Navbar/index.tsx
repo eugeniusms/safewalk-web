@@ -2,8 +2,10 @@ import { Spacer } from "@chakra-ui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { BsMegaphone } from "react-icons/bs";
+import useShareAddressStore from "src/stores/maps";
 
 const Navbar = () => {
+  const { showShareAddress, setShowShareAddress } = useShareAddressStore();
   const router = useRouter();
 
   let iconMenuHome = "/assets/icons/menu-home.svg";
@@ -21,6 +23,11 @@ const Navbar = () => {
     iconMenuProfile = "/assets/icons/menu-profile-active.svg";
   }
 
+  const megaphoneHandler = () => {
+    router.push("/maps");
+    setShowShareAddress(!showShareAddress);
+  };
+
   return (
     <div className="flex justify-between bg-[#252525] absolute bottom-0 left-0 right-0 items-center py-2 px-10 rounded-t-3xl">
       <div onClick={() => router.push("/")}>
@@ -34,7 +41,7 @@ const Navbar = () => {
       {/* TODO: routing on megaphone menu */}
       <div
         className="bg-[#7A2824] rounded-full p-6"
-        onClick={() => router.push("/maps")}
+        onClick={() => megaphoneHandler()}
       >
         <BsMegaphone className="w-5 h-5 text-white" />
       </div>
