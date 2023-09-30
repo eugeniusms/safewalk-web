@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Layout } from "src/components/elements/Layout";
+import { Loading } from "src/components/elements/Loading";
 import { useLocalStorage } from "src/components/hooks/useLocalStorage";
 
 const HOTLINE_DUMMY = [
@@ -30,6 +31,7 @@ const EMERGENCY_DUMMY = [
 ];
 
 export const ContactListModule: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [emergencyContacts, setEmergencyContacts] = useState(EMERGENCY_DUMMY);
   const { handleLoad } = useLocalStorage();
   const router = useRouter();
@@ -46,12 +48,16 @@ export const ContactListModule: React.FC = () => {
       .then((response) => {
         console.log(response.data);
         setEmergencyContacts(response.data.data);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <Layout>
       <div className="h-[92vh] p-6">

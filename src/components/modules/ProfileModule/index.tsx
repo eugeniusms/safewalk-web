@@ -2,6 +2,7 @@ import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Layout } from "src/components/elements/Layout";
+import { Loading } from "src/components/elements/Loading";
 import Toggle from "src/components/elements/Toggle";
 import { useLocalStorage } from "src/components/hooks/useLocalStorage";
 
@@ -15,6 +16,7 @@ const PROFILE_DUMMY = {
 };
 
 export const ProfileModule: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [profile, setProfile] = useState(PROFILE_DUMMY);
   const [toggleIsChecked, setToggleIsChecked] = useState(false);
   const { handleLoad } = useLocalStorage();
@@ -35,12 +37,16 @@ export const ProfileModule: React.FC = () => {
       .then((response) => {
         console.log(response.data);
         setProfile(response.data.data);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <Layout>
       <div className="h-[92vh]">
