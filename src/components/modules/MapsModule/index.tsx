@@ -22,6 +22,7 @@ export const MapsModule: React.FC = () => {
     lat: number;
     lng: number;
   } | null>(null);
+  const [isNormalPin, setIsNormalPin] = useState(true);
 
   const { isLoaded } = useJsApiLoader({
     id: "6f595d9fea01980a",
@@ -80,6 +81,10 @@ export const MapsModule: React.FC = () => {
 
   console.log(userLocation);
 
+  const showPinHandler = () => {
+    setIsNormalPin(!isNormalPin);
+  };
+
   return isLoaded ? (
     <Layout>
       {/* Periksa apakah userLocation berada dalam suatu polygon */}
@@ -90,14 +95,13 @@ export const MapsModule: React.FC = () => {
             polygon.map((coord) => [coord.lat, coord.lng])
           )
         ) && (
-          // isi di bagian ini
           <div className="absolute z-50 left-0 right-0 mx-auto">
             <div className="w-full text-white font-bold">
               <div className="flex items-center bg-[#BD0000]/50 w-11/12 mx-4 my-4 rounded-2xl">
                 <Image
                   src="/assets/icons/caution.svg"
-                  width={80}
-                  height={80}
+                  width={70}
+                  height={70}
                   alt="caution"
                 />
                 <div>
@@ -108,8 +112,8 @@ export const MapsModule: React.FC = () => {
                 </div>
                 <Image
                   src="/assets/icons/caution.svg"
-                  width={80}
-                  height={80}
+                  width={70}
+                  height={70}
                   alt="caution"
                 />
               </div>
@@ -144,11 +148,26 @@ export const MapsModule: React.FC = () => {
           <Marker
             position={userLocation}
             icon={{
-              url: "/assets/icons/pin.png", // Ganti dengan URL gambar marker pengguna Anda
-              scaledSize: new window.google.maps.Size(64, 64), // Ukuran marker
+              url: isNormalPin
+                ? "/assets/icons/pin-person.png"
+                : "/assets/icons/pin.png",
+              scaledSize: isNormalPin
+                ? new window.google.maps.Size(80, 80)
+                : new window.google.maps.Size(64, 64),
             }}
           />
         )}
+        <button
+          className="absolute z-50 bottom-28 right-2 mx-auto"
+          onClick={showPinHandler}
+        >
+          <Image
+            src="/assets/icons/show-gps.svg"
+            width={64}
+            height={64}
+            alt="caution"
+          />
+        </button>
       </GoogleMap>
     </Layout>
   ) : (
