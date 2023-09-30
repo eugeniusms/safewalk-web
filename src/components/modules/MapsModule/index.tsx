@@ -99,6 +99,22 @@ export const MapsModule: React.FC = () => {
     getAddressFromCoordinates(userLocation);
   };
 
+  const shareLocHandler = () => {
+    if (userLocation) {
+      const latitude = userLocation.lat;
+      const longitude = userLocation.lng;
+      const message = "Please, check out my location :(";
+
+      // Construct the WhatsApp share URL with the location and message
+      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
+        message
+      )}&location=${latitude},${longitude}`;
+
+      // Open WhatsApp in a new tab or the WhatsApp app if available
+      window.open(whatsappUrl, "_blank");
+    }
+  };
+
   return isLoaded ? (
     <Layout>
       {/* Periksa apakah userLocation berada dalam suatu polygon */}
@@ -185,10 +201,7 @@ export const MapsModule: React.FC = () => {
           />
         </button>
         {!isNormalPin && (
-          <div
-            className="absolute z-50 left-0 right-0 bottom-24 mx-auto"
-            onClick={showPinHandler}
-          >
+          <div className="absolute z-50 left-0 right-0 bottom-24 mx-auto">
             <div className="w-full text-white">
               <div className="flex items-center bg-[#0D0D0D] w-11/12 mx-4 my-4 rounded-2xl">
                 <div>
@@ -204,7 +217,10 @@ export const MapsModule: React.FC = () => {
                     />
                     <div className="text-sm font-semibold">{address}</div>
                   </div>
-                  <div className="flex justify-center items-center gap-3 px-4 py-4">
+                  <div
+                    className="flex justify-center items-center gap-3 px-4 py-4"
+                    onClick={shareLocHandler}
+                  >
                     <Image
                       src="/assets/icons/cta-share.png"
                       width={310}
