@@ -1,4 +1,3 @@
-import { useToast } from "@chakra-ui/react";
 import {
   GoogleMap,
   Marker,
@@ -6,6 +5,7 @@ import {
   useJsApiLoader,
 } from "@react-google-maps/api";
 import axios from "axios";
+import Image from "next/image";
 import pointInPolygon from "point-in-polygon";
 import React, { useCallback, useEffect, useState } from "react";
 import { Layout } from "src/components/elements/Layout";
@@ -22,7 +22,6 @@ export const MapsModule: React.FC = () => {
     lat: number;
     lng: number;
   } | null>(null);
-  const toast = useToast();
 
   const { isLoaded } = useJsApiLoader({
     id: "6f595d9fea01980a",
@@ -79,20 +78,44 @@ export const MapsModule: React.FC = () => {
     }
   };
 
-  const enteringHighRiskArea = () => {
-    toast({
-      title: "Entering High Risk Area",
-      status: "error",
-      position: "top",
-      duration: 4000,
-      isClosable: true,
-    });
-  };
-
   console.log(userLocation);
 
   return isLoaded ? (
     <Layout>
+      {/* Periksa apakah userLocation berada dalam suatu polygon */}
+      {userLocation &&
+        polygons.some((polygon) =>
+          pointInPolygon(
+            [userLocation.lat, userLocation.lng],
+            polygon.map((coord) => [coord.lat, coord.lng])
+          )
+        ) && (
+          // isi di bagian ini
+          <div className="absolute z-50 left-0 right-0 mx-auto">
+            <div className="w-full text-white font-bold">
+              <div className="flex items-center bg-[#BD0000]/50 w-11/12 mx-4 my-4 rounded-2xl">
+                <Image
+                  src="/assets/icons/caution.svg"
+                  width={80}
+                  height={80}
+                  alt="caution"
+                />
+                <div>
+                  <div className="flex justify-center">Caution!</div>
+                  <div className="flex justify-center">
+                    Entering High Risk Area
+                  </div>
+                </div>
+                <Image
+                  src="/assets/icons/caution.svg"
+                  width={80}
+                  height={80}
+                  alt="caution"
+                />
+              </div>
+            </div>
+          </div>
+        )}
       <GoogleMap
         mapContainerStyle={map_setup.container_style}
         center={center}
@@ -126,16 +149,6 @@ export const MapsModule: React.FC = () => {
             }}
           />
         )}
-
-        {/* Periksa apakah userLocation berada dalam suatu polygon */}
-        {userLocation &&
-          polygons.some((polygon) =>
-            pointInPolygon(
-              [userLocation.lat, userLocation.lng],
-              polygon.map((coord) => [coord.lat, coord.lng])
-            )
-          ) &&
-          enteringHighRiskArea()}
       </GoogleMap>
     </Layout>
   ) : (
