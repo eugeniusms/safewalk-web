@@ -158,7 +158,9 @@ export const MapsModule: React.FC = () => {
           />
         )}
         <button
-          className="absolute z-50 bottom-28 right-2 mx-auto"
+          className={`absolute z-50 ${
+            isNormalPin ? "bottom-28" : "bottom-72"
+          } right-2 mx-auto`}
           onClick={showPinHandler}
         >
           <Image
@@ -168,6 +170,41 @@ export const MapsModule: React.FC = () => {
             alt="caution"
           />
         </button>
+        {!isNormalPin && (
+          <div
+            className="absolute z-50 left-0 right-0 bottom-24 mx-auto"
+            onClick={showPinHandler}
+          >
+            <div className="w-full text-white">
+              <div className="flex items-center bg-[#0D0D0D] w-11/12 mx-4 my-4 rounded-2xl">
+                <div>
+                  <div className="text-white/20 text-sm px-4 pt-4 pb-2">
+                    Your Location
+                  </div>
+                  <div className="flex justify-center items-center gap-3 px-4">
+                    <Image
+                      src="/assets/icons/pin-loc.svg"
+                      width={32}
+                      height={32}
+                      alt="caution"
+                    />
+                    <div className="text-sm font-semibold">
+                      4517 Washington Ave, Manchester, Kentucky 39495
+                    </div>
+                  </div>
+                  <div className="flex justify-center items-center gap-3 px-4 py-4">
+                    <Image
+                      src="/assets/icons/cta-share.png"
+                      width={310}
+                      height={310}
+                      alt="caution"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </GoogleMap>
     </Layout>
   ) : (
