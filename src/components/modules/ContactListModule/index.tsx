@@ -1,19 +1,22 @@
+import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { Layout } from "src/components/elements/Layout";
+import { useLocalStorage } from "src/components/hooks/useLocalStorage";
 
 const HOTLINE_DUMMY = [
   {
     id: 1,
     name: "HopeHelps",
     photo_url: "/assets/images/photo-hopehelps.svg",
-    phone_number: "1800-221-4444",
+    mobile_number: "1800-221-4444",
   },
   {
     id: 2,
     name: "Police",
     photo_url: "/assets/images/photo-police.svg",
-    phone_number: "110",
+    mobile_number: "110",
   },
 ];
 
@@ -22,12 +25,33 @@ const EMERGENCY_DUMMY = [
     id: 1,
     name: "Mom",
     photo_url: "/assets/images/photo-mom.svg",
-    phone_number: "08123456789",
+    mobile_number: "08123456789",
   },
 ];
 
 export const ContactListModule: React.FC = () => {
+  const [emergencyContacts, setEmergencyContacts] = useState(EMERGENCY_DUMMY);
+  const { handleLoad } = useLocalStorage();
   const router = useRouter();
+
+  useEffect(() => {
+    const email = handleLoad("SW-EMAIL");
+    const password = handleLoad("SW-PASSWORD");
+    const sendData = {
+      email,
+      password,
+    };
+    axios
+      .post("/api/contact/manual", sendData)
+      .then((response) => {
+        console.log(response.data);
+        setEmergencyContacts(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <Layout>
       <div className="h-[92vh] p-6">
@@ -50,8 +74,8 @@ export const ContactListModule: React.FC = () => {
                     <div>
                       <div className="text-white font-bold">{hotline.name}</div>
                       <div className="text-white/40">
-                        {hotline.phone_number.slice(0, 6)}
-                        {hotline.phone_number.length > 6 && "..."}
+                        {hotline.mobile_number.slice(0, 6)}
+                        {hotline.mobile_number.length > 6 && "..."}
                       </div>
                     </div>
                   </div>
@@ -80,7 +104,7 @@ export const ContactListModule: React.FC = () => {
         </div>
         <div>
           <div className="text-2xl font-bold text-white">Emergency Contact</div>
-          {EMERGENCY_DUMMY.map((emergency: any, id: number) => {
+          {emergencyContacts.map((emergency: any, id: number) => {
             return (
               <div
                 key={id}
@@ -99,8 +123,8 @@ export const ContactListModule: React.FC = () => {
                         {emergency.name}
                       </div>
                       <div className="text-white/40">
-                        {emergency.phone_number.slice(0, 6)}
-                        {emergency.phone_number.length > 6 && "..."}
+                        {emergency.mobile_number.slice(0, 6)}
+                        {emergency.mobile_number.length > 6 && "..."}
                       </div>
                     </div>
                   </div>
