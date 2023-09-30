@@ -213,6 +213,7 @@ export const MapsModule: React.FC = () => {
                       width={32}
                       height={32}
                       alt="caution"
+                      onClick={setCenterHandler}
                     />
                     <div className="text-sm font-semibold">{address}</div>
                   </div>
