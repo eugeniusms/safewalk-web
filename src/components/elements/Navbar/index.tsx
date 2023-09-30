@@ -32,7 +32,10 @@ const Navbar = () => {
       </div>
       <Spacer />
       {/* TODO: routing on megaphone menu */}
-      <div className="bg-[#7A2824] rounded-full p-6">
+      <div
+        className="bg-[#7A2824] rounded-full p-6"
+        onClick={() => router.push("/maps")}
+      >
         <BsMegaphone className="w-5 h-5 text-white" />
       </div>
       <Spacer />
