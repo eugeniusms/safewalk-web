@@ -1,11 +1,13 @@
 import { Spacer } from "@chakra-ui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { BsMegaphone } from "react-icons/bs";
 import useShareAddressStore from "src/stores/maps";
 
 const Navbar = () => {
   const { showShareAddress, setShowShareAddress } = useShareAddressStore();
+  const [isEmergency, setIsEmergency] = useState(false);
   const router = useRouter();
 
   let iconMenuHome = "/assets/icons/menu-home.svg";
@@ -26,6 +28,7 @@ const Navbar = () => {
   const megaphoneHandler = () => {
     router.push("/maps");
     setShowShareAddress(!showShareAddress);
+    setIsEmergency(!isEmergency);
   };
 
   return (
@@ -39,12 +42,20 @@ const Navbar = () => {
       </div>
       <Spacer />
       {/* TODO: routing on megaphone menu */}
-      <div
-        className="bg-[#7A2824] rounded-full p-6"
-        onClick={() => megaphoneHandler()}
-      >
-        <BsMegaphone className="w-5 h-5 text-white" />
-      </div>
+      {!isEmergency ? (
+        <div
+          className="bg-[#7A2824] rounded-full p-6"
+          onClick={() => megaphoneHandler()}
+        >
+          <BsMegaphone className="w-5 h-5 text-white" />
+        </div>
+      ) : (
+        <a href={`tel:110`}>
+          <div className="bg-[#7A2824] rounded-full p-6 animate-bounce">
+            <BsMegaphone className="w-5 h-5 text-white" />
+          </div>
+        </a>
+      )}
       <Spacer />
       <div onClick={() => router.push("/contact/list")}>
         <Image src={iconMenuCall} alt="logo" width={20} height={20} />
